@@ -1,0 +1,196 @@
+header{
+    font-size: 1em;
+}
+
+/* navigation section */
+
+header nav{
+    display: flex;
+    justify-content: space-between;
+    padding: 10px 15px;
+    font-size: 1em;
+}
+
+header nav .nav-right{
+    display: flex;
+    align-items: center;
+}
+
+header nav .nav-right a{
+    color: #444;
+    padding: 5px 10px;
+    margin: 0px 5px;
+    font-size: 1.1em;
+}
+
+header nav .nav-left .register-login-btn{
+    border: 1px solid #666;
+    padding: 5px 8px;
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+header nav .nav-left .register-login-btn i{
+    margin: 7px;
+    color: #444;
+    font-size: 1.1em;
+}
+
+header nav .nav-left .register-login-btn a{
+    color: #444;
+    font-size: 0.9em;
+    margin: 0px 10px;
+}
+
+
+/* slider section */
+
+.slider{
+    position: relative;
+    font-size: 1em;
+}
+
+.slider .slides{
+
+}
+
+.slider .slides .item{
+    position: relative;
+    display: none;
+}
+
+.slider .slides .active{
+    display: block;
+    animation-name: fadeIn;
+    animation-duration: 2s;
+}
+
+.slider .slides .item img{
+    width: 100%;
+    aspect-ratio: 5/3;
+    display: block;
+    padding: 15px;
+    border-radius: 35px;
+}
+
+.slider .slides .item span{
+    position: absolute;
+    right: 10%;    
+    top: 40%;
+    color: white;
+    font-size: 2.5em;
+}
+
+.slider .buttons{
+    position: absolute;
+    bottom: 30px;
+    left: 40px;
+    z-index: 1;
+}
+
+.slider .buttons i{
+    color: white;
+    margin-right: 5px;
+    cursor: pointer;
+}
+
+.slider .buttons i:hover{
+    color: rgb(255, 255, 255, 0.4);
+}
+
+/* product section */
+
+.product-sec-new {
+    padding: 20px 10px;
+    font-size: 1em;
+
+}
+
+.product-sec-new .shopping-card {
+    text-align: center;
+    box-shadow: 0px 2px 8px 0px rgba(0, 0, 0, 0.5);
+    margin: 10px 15px;
+    border-radius: 5px;
+    padding: 10px;
+}
+
+.shopping-card .img-sec {
+    position: relative;
+}
+
+.shopping-card .img-sec img{
+    width: 60%;
+    border-radius: 10px;
+}
+
+.shopping-card .img-sec .hot-offer{
+    background-color: #e74c3c;
+    color: white;
+    padding: 3px 5px;
+    border-radius: 10px;position: absolute;
+    right: 10px;
+    top: 10px;
+    font-size: 0.9em;
+}
+
+.shopping-card .img-sec .stars{
+    position: absolute;
+    left: 70px;
+    top: 10px;
+    color: #f1c40f;
+}
+
+.shopping-card .title {
+    color: #333;
+    margin: 15px;
+}
+
+.shopping-card .buttons {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 5px 15px;
+}
+
+.shopping-card .buttons .right .price{
+    color: #666;
+    font-weight: bold;
+}
+
+.shopping-card .buttons .left {
+    display: flex;
+}
+
+.shopping-card .buttons .left .extend-btn {
+    display: flex;
+    margin-left: 5px;
+    align-items: center;
+    justify-content: space-between;
+    background-color: #2ecc71;
+    color: white;
+    width: 40px;
+    padding: 8px 12px;
+    border-radius: 25px;
+    cursor: pointer;
+    transition: 0.75s;
+}
+
+.shopping-card .buttons .left .extend-btn:hover {
+    width: 100px;
+}
+
+.shopping-card .buttons .left .extend-btn .b-text {
+    display: none;
+    color: white;
+}
+
+.shopping-card .buttons .left .extend-btn .b-icon {
+    color: white;
+}
+
+.shopping-card .buttons .left .extend-btn:hover .b-text {
+    display: block;
+    padding: 3px;
+}
