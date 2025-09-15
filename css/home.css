@@ -156,6 +156,14 @@ header nav .nav-left .register-login-btn a{
     position: absolute;
     left: 70px;
     top: 10px;
+}
+
+.shopping-card .img-sec .stars i {
+    color: white;
+    -webkit-text-stroke: 1px #444;
+}
+
+.shopping-card .img-sec .stars i.active {
     color: #f1c40f;
 }
 
@@ -212,6 +220,43 @@ header nav .nav-left .register-login-btn a{
 .shopping-card .buttons .left .extend-btn:hover .b-text {
     display: block;
     padding: 3px;
+}
+
+.product-slider {
+    position: relative;
+    overflow: hidden;
+    align-items: center;
+    display: flex;
+    justify-content: center;
+}
+
+.product-slider img {
+    display: none !important;
+    width: 100%;
+}
+
+.product-slider img.active {
+    display: block !important;
+}
+
+.product-slider button {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: rgba(0, 0, 0, 0.5);
+    color: #fff;
+    border: none;
+    padding: 8px 12px;
+    cursor: pointer;
+    border-radius: 50%;
+}
+
+.product-slider .prev {
+    left: 10px;
+}
+
+.product-slider .next {
+    right: 10px;
 }
 
 /* supper offer section */
