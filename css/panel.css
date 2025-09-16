@@ -77,7 +77,8 @@
     border: none;
     background: none;
     outline: none;
-
+    flex: 1;
+    min-width: 100px;
   }
   
   .main-box header nav .right .search i {
@@ -123,11 +124,18 @@
     padding: 30px;
   }
 
+  .row {
+    display: flex;
+    justify-content: space-between;
+  }
+
   /* mini-cards */
   .mini-card-report {
     display: flex;
-    justify-content: center;
+    justify-content: space-around;
     align-items: center;
+    border-radius: 5px;
+    padding: 15px 20px;
   }
   
   .mini-card-report .right {
@@ -135,7 +143,9 @@
     border-bottom-right-radius: 5px;
     border-top-right-radius: 5px;
     padding: 25px 15px;
-
+    display: flex;
+    justify-content: center;
+    align-items: center;
   }
   
   .mini-card-report .right i {
@@ -150,7 +160,9 @@
     border-top-left-radius: 5px;
     display: flex;
     flex-direction: column;
-
+    flex: 1;
+    justify-content: center;
+    align-items: center;
   }
   
   .mini-card-report .left span:first-child {
@@ -173,11 +185,7 @@
     border-top-right-radius: 5px;
 
   }
-  
-  .revenue-box .head .right {
 
-  }
-  
   .revenue-box .head .left {
     display: flex;
     align-items: center;
@@ -247,9 +255,6 @@
   }
   
   /* menu-btns */
-  .menu-btns {
-
-  }
 
   .menu-btns .item {
     display: flex;
@@ -270,14 +275,6 @@
   .menu-btns .item span {
     margin-right: 25px;
     color: var(--color-text-header);
-  }
-
-  .menu-btns .item-active {
-    background-color: var(--color-bg-2);
-  }
-
-  .menu-btns .item-active span {
-    color: var(--color-text-header-2);
   }
   
   
