@@ -1,153 +1,280 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.css"
-    />
-    <link rel="stylesheet" href="./css/panel.css" />
-    <link rel="stylesheet" href="./css/main.css" />
-    <link rel="stylesheet" href="./css/flexboxgrid.css" />
 
-    <title>Document</title>
-  </head>
-  <body>
-    <div id="panel" class="panel">
-      <div id="right">
-        <section class="menu">
-          <div class="user-info">
-            <div class="img-name">
-              <img src="./images/IMG_6353.jpg" alt="" />
-              <span class="name">Ali</span>
-              <i onclick="toggleUserDetails()" class="fas fa-angle-up"></i>
-            </div>
-            <div class="details">
-              <div class="details-item">
-                <span> سطح دسترسی :</span>
-                <span> ادمین</span>
-              </div>
-              <div class="details-item">
-                <span> وضعیت : </span>
-                <span>آنلاین</span>
-              </div>
-            </div>
-          </div>
-          <div class="menu-btns">
-            <a class="item" href="">
-              <i class="fas fa-bell"></i>
-              <span>محصولات</span>
-            </a>
-            <a class="item item-active" href="">
-              <i class="fas fa-bell"></i>
-              <span>سفارش ها</span>
-            </a>
-            <a class="item" href="">
-              <i class="fas fa-bell"></i>
-              <span>گزارش ها</span>
-            </a>
-            <a class="item" href="">
-              <i class="fas fa-bell"></i>
-              <span>پشتیبانی</span>
-            </a>
-            <a class="item" href="">
-              <i class="fas fa-bell"></i>
-              <span>کاربر ها</span>
-            </a>
-          </div>
-        </section>
-      </div>
-      <div id="left">
-        <section class="main-box">
-          <header>
-            <nav>
-              <div class="right">
-                <i onclick="togglePanel()" class="fas fa-bars"></i>
-                <div class="search">
-                  <input type="text" />
-                  <i class="fas fa-search"></i>
-                </div>
-              </div>
-              <div class="left">
-                <a href=""><i class="fas fa-bell"></i></a>
-                <a href=""><i class="fas fa-cog"></i></a>
-                <a href=""><i class="fas fa-power-off"></i></a>
-              </div>
-            </nav>
-            <div class="header-message">
-              <h3>آخرین ورود دو روز پیش</h3>
-              <a href="" class="lang-btn">فارسی</a>
-            </div>
-          </header>
-          <div class="holder">
-            <div class="row">
-              <div class="col-lg-3">
-                <div class="mini-card-report">
-                  <div class="right">
-                    <i class="fas fa-clipboard-list"></i>
-                  </div>
-                  <div class="left">
-                    <span>تکمیل انبار</span>
-                    <span>400</span>
-                  </div>
-                </div>
-              </div>
-              <div class="col-lg-3">
-                <div class="mini-card-report">
-                  <div class="right">
-                    <i class="fas fa-clipboard-list"></i>
-                  </div>
-                  <div class="left">
-                    <span>محصولات</span>
-                    <span>268</span>
-                  </div>
-                </div>
-              </div>
-              <div class="col-lg-3">
-                <div class="mini-card-report">
-                  <div class="right">
-                    <i class="fas fa-clipboard-list"></i>
-                  </div>
-                  <div class="left">
-                    <span>تحویل پست</span>
-                    <span>57</span>
-                  </div>
-                </div>
-              </div>
-              <div class="col-lg-3">
-                <div class="mini-card-report">
-                  <div class="right">
-                    <i class="fas fa-clipboard-list"></i>
-                  </div>
-                  <div class="left">
-                    <span>تصویه</span>
-                    <span>4000000</span>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="revenue-box">
-              <div class="head">
-                <div class="right">
-                  در آمد
-                </div>
-                <div class="left">
-                  <i class="fas fa-cog"></i>
-                  <i class="fas fa-redo"></i>
-                </div>
-              </div>
-              <div class="content">
-                <canvas id="myChart" width="300" height="150"></canvas>
-              </div>
-            </div>
-          </div>
-        </section>
-      </div>
-    </div>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.0/dist/Chart.min.js"></script>
-    <script src="./js/panel.js"></script>
+:root {
+    --color-bg-1: white;
+    --color-bg-2: rgba(0, 0, 0, 0.03);
+    --color-bg-3: #f1f2f6;
+    --color-bg-4: rgba(255, 255, 255, 0.6);
+    --color-bg-5: rgba(0, 0, 0, 0.02);  
+    --color-icon-1: #2980b9;
+    --color-icon-2: #444;
+    --color-icon-3: rgba(0, 0, 0, 0.3);
+    --color-border-1: rgba(0, 0, 0, 0.05);
+    --color-text-span: rgba(0, 0, 0, 0.6);
+    --color-text-header: #444;
+    --color-text-header-2: #2980b9;
+    --color-text-paragraph: #666;
+  }
   
-</body>
-</html>
+  .panel{
+    display: grid;
+    grid-template-columns: 2fr 11fr;
+
+  }
+
+  .panel-min{
+    display: grid;
+    grid-template-columns: 1fr 13fr;
+  }
+  
+  .menu {
+    width: 100%;
+    min-height: 800px;
+    background-color: var(--color-bg-1) ;
+  }
+  
+  .main-box {
+    width: 100%;
+  }
+  
+  .main-box header {
+    background-color: var(--color-bg-1) ;
+    font-size: 1em;
+    border : 1px solid var(--color-border-1);
+  }
+  
+  /* navigation  */
+  .main-box header nav {
+    display: flex;
+    justify-content: space-between;
+    padding: 20px;
+    align-items: center;
+  }
+
+  .main-box header nav .right {
+    display: flex;
+    align-items: center;
+  }
+  
+  .main-box header nav .right i {
+    font-size: 1.8em;
+    cursor: pointer;
+    color: var(--color-icon-1);
+  }
+  
+  .main-box header nav .right .search {
+    display: flex;
+    align-items: center;
+    border: 1px solid var(--color-border-1);
+    border-radius: 5px;
+    margin-right: 15px;
+    padding: 8px;
+    padding-left: 11px;
+    background-color: var(--color-bg-2);
+
+  }
+  
+  .main-box header nav .right .search input {
+    border: none;
+    background: none;
+    outline: none;
+    flex: 1;
+    min-width: 100px;
+  }
+  
+  .main-box header nav .right .search i {
+    font-size: 1.2em;
+    color: var(--color-icon-3);
+  }
+  
+  .main-box header nav .left {
+  }
+  
+  .main-box header nav .left a {
+    margin-right: 20px;
+    color: var(--color-icon-2);
+  }
+
+  .main-box header nav .left a:hover {
+    color: var(--color-icon-1);
+  }
+  
+  /* header message  */
+  .main-box header .header-message {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+  }
+  
+  .main-box header .header-message h3 {
+    color: var(--color-text-header);
+  }
+
+  .main-box header .header-message a {
+    background-color: var(--color-bg-2);
+    border: 1px solid var(--color-border-1);
+    padding: 5px 15px;
+    border-radius: 5px;
+    color: var(--color-text-header);
+  }
+  
+  /* holder */
+  .holder {
+    background-color: var(--color-bg-3);
+    padding: 30px;
+  }
+
+  .row {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  /* mini-cards */
+  .mini-card-report {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    border-radius: 5px;
+    padding: 15px 20px;
+  }
+  
+  .mini-card-report .right {
+    background-color: var(--color-bg-4);
+    border-bottom-right-radius: 5px;
+    border-top-right-radius: 5px;
+    padding: 25px 15px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .mini-card-report .right i {
+    color: var(--color-icon-1);
+
+  }
+  
+  .mini-card-report .left {
+    background-color: var(--color-bg-1);
+    padding: 12px 50px;
+    border-bottom-left-radius: 5px;
+    border-top-left-radius: 5px;
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .mini-card-report .left span:first-child {
+    color: var(--color-text-header-2);
+  }
+  
+  /* revenue box  */
+  .revenue-box {
+    margin-top: 20px;
+    box-shadow: 0px 2px 8px 0px rgba(0, 0, 0, 0.1);
+  }
+  
+  .revenue-box .head {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: var(--color-bg-4);
+    padding: 5px 20px;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+
+  }
+
+  .revenue-box .head .left {
+    display: flex;
+    align-items: center;
+  }
+  
+  .revenue-box .head .left i {
+    color: var(--color-icon-2);
+    margin-right: 15px;
+  }
+  
+  .revenue-box .content {
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+    padding: 20px;
+    background-color: var(--color-bg-1);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  /* menu */
+  .menu {
+    font-size: 1em;
+  }
+
+  .menu .user-info {
+    padding: 20px;
+    border : 1px solid var(--color-border-1);
+  }
+
+  .menu .user-info .img-name {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+  }
+  
+  .menu .user-info .img-name img {
+    width: 50px;
+    border-radius: 50%;
+    border: 3px solid var(--color-border-1);
+  }
+
+  .menu .user-info .img-name .name {
+    font-size: .9em;
+    color: var(--color-icon-2);
+    margin-right: 10px;
+  }
+
+  .menu .user-info .img-name i {
+    color: var(--color-icon-2);
+  }
+
+  .menu .user-info .details {
+    padding: 10px 5px;
+  }
+  
+  .menu .user-info .details .details-item {
+    display: flex;
+    margin-top: 5px;
+    justify-content: space-between;
+  }
+  
+  .menu .user-info .details .details-item span {
+    font-size: .8em;
+    color: var(--color-text-span);
+  }
+  
+  /* menu-btns */
+
+  .menu-btns .item {
+    display: flex;
+    justify-content: flex-start;
+    padding: 20px 30px 20px 0px;
+    transition: 0.45s;
+  }
+
+  .menu-btns .item:hover {
+    background-color: var(--color-bg-2);
+  }
+
+  .menu-btns .item i {
+    font-size: 1.4em;
+    color: var(--color-icon-1);
+  }
+
+  .menu-btns .item span {
+    margin-right: 25px;
+    color: var(--color-text-header);
+  }
+  
+  
