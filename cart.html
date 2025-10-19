@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/cart.css">
+    <title>Document</title>
+</head>
+<body>
+    <section class="cart-container">
+        <div id="cart-items-container">
+            
+        </div>
+    </section>
+    <script src="js/cart.js"></script>
+    <script>
+            const deletItem = (id) => {
+                 if(confirm("آیا برای حذف اطمینان دارید ؟")){
+                    const username = JSON.parse(localStorage.getItem("logged-in"))?.username;
+                 let cart = JSON.parse(localStorage.getItem(username))?.cart;
+
+                 cart = cart.filter((item) => item.id != id);
+
+                 localStorage.setItem(
+                    username,
+                    JSON.stringify({username: username, cart: cart})
+                );
+
+                alert("محصول مورد نظر با موفقیت حذف شد.");
+                location.reload();
+                 }
+            };
+        </script>
+</body>
+</html>
