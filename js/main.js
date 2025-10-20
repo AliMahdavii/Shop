@@ -41,13 +41,10 @@ const doesUserLoggedIn = JSON.parse(
   localStorage.getItem("logged-in")
 )?.username;
 
-const headerDynamicContentContainer = document.querySelector(
-  "#header-dynamic-content"
-);
-
+const headerDynamicContentContainer = document.querySelector("#header-dynamic-content");
 const productSecNew = document.querySelector(".product-sec-new");
 const supperOfferSection = document.querySelector(".supper-offer-section");
-const otherClothes = document.querySelector("other-clothes");
+const otherClothes = document.querySelector(".other-clothes");
 
 document.addEventListener("DOMContentLoaded", ()=>{
     if(doesUserLoggedIn){
@@ -78,15 +75,12 @@ document.addEventListener("DOMContentLoaded", ()=>{
                     <div class="img-sec">
                         <div class="product-slider">
                             <img src="${product?.mainImage}" alt="" class="active">
-                            <img src="${product?.gallery[0]}" alt="">
-                            <img src="${product?.gallery[1]}" alt="">
-                            <img src="${product?.gallery[2]}" alt="">
-                            <img src="${product?.gallery[3]}" alt="">
-                            <img src="${product?.gallery[4]}" alt="">
+                            ${product?.gallery.map(img => `<img src="${img}" alt="">`).join('')}
 
                             <button class="prev">&#10095;</button>
                             <button class="next">&#10094;</button>
                         </div>
+                        ${product.isHotOffer?`<span class="hot-offer">پیشنهاد ویژه</span>`:""}
                         <div class="stars" data-rating="${product?.stars}">
                             <i class="fas fa-star"></i>
                             <i class="fas fa-star"></i>
@@ -102,7 +96,13 @@ document.addEventListener("DOMContentLoaded", ()=>{
                         <div class="right">
                             <span class="price">${product?.price.toLocaleString()} تومان</span>
                         </div>
-                        <div onclick='addToCart(${product?.id},${product?.price},"${product?.name}","${product?.mainImage}")' class="product-tocart-section">
+                        <div onclick='addToCart(
+                        ${product?.id},
+                        ${product?.price},
+                        "${product?.name.replace(/"/g, '&quot;')}",
+                        "${product?.mainImage}",
+                        ${JSON.stringify(product?.gallery).replace(/"/g, '&quot;')}
+                        )' class="product-tocart-section">
                             <button>افزودن به سبد خرید</button>
                         </div>
                     </div>
@@ -123,15 +123,14 @@ document.addEventListener("DOMContentLoaded", ()=>{
                                     <div class="image-container">
                                         <div class="product-slider">
                             <img src="${superOfferProduct?.mainImage}" alt="" class="active">
-                            <img src="${superOfferProduct?.gallery[0]}" alt="">
-                            <img src="${superOfferProduct?.gallery[1]}" alt="">
+                            ${superOfferProduct?.gallery.map(img => `<img src="${img}" alt="">`).join('')}
 
                             <button class="prev">&#10095;</button>
                             <button class="next">&#10094;</button>
                         </div>
                                     </div>
                                 </div>
-                                <div class="col-lg-8">
+                                <div class="col-lg-8 info">
                                     <div class="spesificiation">
                                         <div class="title">${superOfferProduct?.name}</div>
                                         <div class="price-row">
@@ -145,7 +144,13 @@ document.addEventListener("DOMContentLoaded", ()=>{
                                             <span id="hours">15</span>
                                         </div>
                                         <div class="remaining-time"> زمان باقی مانده تا پایان سفارش </div>
-                                        <div onclick='addToCart(${superOfferProduct?.id},${superOfferProduct?.discountPrice},"${superOfferProduct?.name}","${superOfferProduct?.mainImage}")' class="product-tocart-section">
+                                        <div onclick='addToCart(
+                                        ${superOfferProduct?.id},
+                                        ${superOfferProduct?.discountPrice},
+                                        "${superOfferProduct?.name.replace(/"/g, '&quot;')}",
+                                        "${superOfferProduct?.mainImage}",
+                                        ${JSON.stringify(superOfferProduct?.gallery).replace(/"/g, '&quot;')}
+                                        )' class="product-tocart-section">
                                             <button>افزودن به سبد خرید</button>
                                         </div>
                                     </div>
@@ -172,12 +177,12 @@ document.addEventListener("DOMContentLoaded", ()=>{
                     <div class="img-sec">
                         <div class="product-slider">
                             <img src="${otherProduct?.mainImage}" alt="" class="active">
-                            <img src="${otherProduct?.gallery[0]}" alt="">
+                            ${otherProduct?.gallery.map(img => `<img src="${img}" alt="">`).join('')}
 
                             <button class="prev">&#10095;</button>
                             <button class="next">&#10094;</button>
                         </div>
-                        <span class="hot-offer">پیشنهاد ویژه</span>
+                        ${otherProduct.isHotOffer?`<span class="hot-offer">پیشنهاد ویژه</span>`:""}
                         <div class="stars" data-rating="${otherProduct?.stars}">
                             <i class="fas fa-star"></i>
                             <i class="fas fa-star"></i>
@@ -193,7 +198,13 @@ document.addEventListener("DOMContentLoaded", ()=>{
                         <div class="right">
                             <span class="price">${otherProduct?.price.toLocaleString()} تومان</span>
                         </div>
-                        <div onclick='addToCart(${otherProduct?.id},${product?.price},"${product?.name}","${product?.mainImage}")' class="product-tocart-section">
+                        <div onclick='addToCart(
+                        ${otherProduct?.id},
+                        ${otherProduct?.price},
+                        "${otherProduct?.name.replace(/"/g, '&quot;')}",
+                        "${otherProduct?.mainImage}",
+                        ${JSON.stringify(otherProduct?.gallery).replace(/"/g, '&quot;')}
+                        )' class="product-tocart-section">
                             <button>افزودن به سبد خرید</button>
                         </div>
                     </div>
@@ -202,14 +213,15 @@ document.addEventListener("DOMContentLoaded", ()=>{
             );
         });
 
-        document.querySelectorAll(".shopping-card .img-sec .stars").forEach(starContainer => {
-  const rating = parseInt(starContainer.getAttribute("data-rating"));
-  const stars = starContainer.querySelectorAll("i");
+    document.querySelectorAll(".shopping-card .img-sec .stars").forEach(starContainer => {
+    const rating = parseInt(starContainer.getAttribute("data-rating"));
+    const stars = starContainer.querySelectorAll("i");
 
   stars.forEach((star, index) => {
     if (index < rating) {
       star.classList.add("active");
     }
+  });
   });
 
   document.querySelectorAll(".product-slider").forEach(slider => {
@@ -232,16 +244,13 @@ document.addEventListener("DOMContentLoaded", ()=>{
     index = (index + 1) % imgs.length;
     showImage(index);
   });
-});
-
-
-});        
+});       
 
     } else{
         headerDynamicContentContainer.insertAdjacentHTML(
             "beforeend",
             `<div class="nav-right">
-            <a href=""><i class="fa-solid fa-user"></i></a>
+            <a href="login.html"><i class="fa-solid fa-user"></i></a>
             <a href="cart.html"><i class="fa-solid fa-cart-shopping"></i></a>
             <a href="index.html"><i class="fa-solid fa-house"></i></a>
             <a href=""><i class="fa-solid fa-magnifying-glass"></i></a>
@@ -261,15 +270,12 @@ document.addEventListener("DOMContentLoaded", ()=>{
                     <div class="img-sec">
                         <div class="product-slider">
                             <img src="${product?.mainImage}" alt="" class="active">
-                            <img src="${product?.gallery[0]}" alt="">
-                            <img src="${product?.gallery[1]}" alt="">
-                            <img src="${product?.gallery[2]}" alt="">
-                            <img src="${product?.gallery[3]}" alt="">
-                            <img src="${product?.gallery[4]}" alt="">
+                            ${product?.gallery.map(img => `<img src="${img}" alt="">`).join('')}
 
                             <button class="prev">&#10095;</button>
                             <button class="next">&#10094;</button>
                         </div>
+                        ${product.isHotOffer?`<span class="hot-offer">پیشنهاد ویژه</span>`:""}
                         <div class="stars" data-rating="${product?.stars}">
                             <i class="fas fa-star"></i>
                             <i class="fas fa-star"></i>
@@ -304,12 +310,12 @@ document.addEventListener("DOMContentLoaded", ()=>{
                     <div class="img-sec">
                         <div class="product-slider">
                             <img src="${otherProduct?.mainImage}" alt="" class="active">
-                            <img src="${otherProduct?.gallery[0]}" alt="">
+                            ${otherProduct?.gallery.map(img => `<img src="${img}" alt="">`).join('')}
 
                             <button class="prev">&#10095;</button>
                             <button class="next">&#10094;</button>
                         </div>
-                        <span class="hot-offer">پیشنهاد ویژه</span>
+                        ${otherProduct.isHotOffer?`<span class="hot-offer">پیشنهاد ویژه</span>`:""}
                         <div class="stars" data-rating="${otherProduct?.stars}">
                             <i class="fas fa-star"></i>
                             <i class="fas fa-star"></i>
@@ -325,9 +331,11 @@ document.addEventListener("DOMContentLoaded", ()=>{
                         <div class="right">
                             <span class="price">${otherProduct?.price.toLocaleString()} تومان</span>
                         </div>
+                        <div onclick="goToLogin()" class="product-tocart-section padding-1">
                         <button>
                             وارد حساب کاربری شوید
                         </button>
+                    </div>
                     </div>
                 </div>
                 </div>`
@@ -347,15 +355,14 @@ document.addEventListener("DOMContentLoaded", ()=>{
                                     <div class="image-container">
                                         <div class="product-slider">
                             <img src="${superOfferProduct?.mainImage}" alt="" class="active">
-                            <img src="${superOfferProduct?.gallery[0]}" alt="">
-                            <img src="${superOfferProduct?.gallery[1]}" alt="">
+                            ${superOfferProduct?.gallery.map(img => `<img src="${img}" alt="">`).join('')}
 
                             <button class="prev">&#10095;</button>
                             <button class="next">&#10094;</button>
                         </div>
                                     </div>
                                 </div>
-                                <div class="col-lg-8">
+                                <div class="col-lg-8 info">
                                     <div class="spesificiation">
                                         <div class="title">${superOfferProduct?.name}</div>
                                         <div class="price-row">
