@@ -8,6 +8,7 @@ export const otherProducts = [
             "images/6/IMG_1938.AVIF"
         ],
         stars: 2,
+        isHotOffer: true,
         id: "6"
     },
     {
@@ -21,6 +22,7 @@ export const otherProducts = [
             "images/7/IMG_1943.AVIF"
         ],
         stars: 4,
+        isHotOffer: false,
         id: "7"
     },
     {
@@ -32,6 +34,7 @@ export const otherProducts = [
             "images/8/IMG_1966.AVIF"
         ],
         stars: 3,
+        isHotOffer: false,
         id: "8"
     },
     {
@@ -42,6 +45,7 @@ export const otherProducts = [
             "images/9/IMG_1962.AVIF"
         ],
         stars: 3,
+        isHotOffer: false,
         id: "9"
     },
     {
@@ -55,6 +59,7 @@ export const otherProducts = [
             "images/10/IMG_1959.AVIF"
         ],
         stars: 3,
+        isHotOffer: false,
         id: "10"
     },
     {
@@ -68,6 +73,7 @@ export const otherProducts = [
             "images/11/IMG_1949.AVIF"
         ],
         stars: 3,
+        isHotOffer: true,
         id: "11"
     }
 
