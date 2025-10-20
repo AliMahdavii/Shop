@@ -294,6 +294,13 @@ header nav .nav-left .register-login-btn a{
     width: 100%;
 }
 
+.supper-offer-box .body .info {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: auto;
+}
+
 .supper-offer-box .body .spesificiation {
     padding: 30px 10px;
     margin-top: 25px;
