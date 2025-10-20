@@ -16,20 +16,40 @@ document.addEventListener("DOMContentLoaded", () => {
         );
 
         cart.length > 0 ?
-        cart.map(({name, price, id, img}) => {
+        cart.map(({name, price, id, mainImage, gallery}) => {
+
+            const galleryImages = Array.isArray(gallery) && gallery.length > 0 ? gallery : [];
+
+            const imageTags = [mainImage, ...galleryImages]
+                    .map((img, index) =>
+                        `<img src="${img}" alt="${name}" class="${index === 0 ? 'active' : ''}">`
+                    )
+                    .join("");
+
             cartItemContainer.insertAdjacentHTML(
                 "beforeend",
-                `<div class="cart-item">
-                    <img src="${img}" alt="">
-                    <p class="">${name}</p>
-                    <p>قیمت : ${price.toLocaleString()}</p>
-                    <button onclick="deletItem(${id})">حذف</button>
+                `<div class="shopping-card">
+                    <div class="img-sec">
+                        <div class="product-slider">
+                            ${imageTags}
+
+                            <button class="prev">&#10095;</button>
+                            <button class="next">&#10094;</button>
+                        </div>
+                    </div>
+                    <div class="title">
+                        ${name}
+                    </div>
+                    <div class="buttons">
+                            <span class="price">${price.toLocaleString()} تومان</span>
+                            <button onclick="deletItem(${id})" class="deletItem">حذف</button>
+                    </div>
                 </div>`
             );
         })
         : cartItemContainer.insertAdjacentHTML(
                 "beforeend",
-                `<p class="emptt-p">کالایی در سبد خرید شما وجود ندارد.<p>`
+                `<p class="empty-p">کالایی در سبد خرید شما وجود ندارد.<p>`
             );
 
             let totalPrices = 0;
@@ -40,14 +60,36 @@ document.addEventListener("DOMContentLoaded", () => {
             if(totalPrices>0){
             cartContainer.insertAdjacentHTML(
                 "beforeend",
-                `<p style="font-size:1.3rem; font-weight=500;">** مجموعا ${cart.length} کالا به ارزش ${totalPrices.toLocaleString()} تومان **</p>`
+                `<p style="font-size:1.3rem; font-weight: 700;">** مجموعا ${cart.length} کالا به ارزش ${totalPrices.toLocaleString()} تومان **</p>`
             )}
     } else{
         cartContainer.insertAdjacentHTML(
-            "beforeend",
-            `<p class="">ابتدا باید وارد حساب کاربری خود شوید!</p>
+            "afterbegin",
+            `<p style="font-size:2.5rem; font-weight:500;">ابتدا باید وارد حساب کاربری خود شوید!</p>
 
-            <a href="login.html" class="">برای ورود کلیک کنید.</a>`
+            <a href="login.html" class="underline">برای ورود کلیک کنید.</a>`
         );
     }
+
+    document.querySelectorAll(".product-slider").forEach(slider => {
+    const imgs = slider.querySelectorAll("img");
+    const prev = slider.querySelector(".prev");
+    const next = slider.querySelector(".next");
+    let index = 0;
+
+    function showImage(i) {
+        imgs.forEach(img => img.classList.remove("active"));
+        imgs[i].classList.add("active");
+    }
+
+    prev.addEventListener("click", () => {
+        index = (index - 1 + imgs.length) % imgs.length;
+        showImage(index);
+    });
+
+    next.addEventListener("click", () => {
+        index = (index + 1) % imgs.length;
+        showImage(index);
+    });
+    });
 });
