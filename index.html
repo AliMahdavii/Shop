@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="fa">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"/>
+    <link rel="stylesheet" href="css/home.css">
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/animate.css">
+    <link rel="stylesheet" href="css/flexboxgride.css">
+    <link rel="stylesheet" href="css/owl.carousel.min.css">
+    <link rel="stylesheet" href="css/owl.theme.default.min.css">
+    <title>Document</title>
+</head>
+<body>
+    <header>
+        <nav id="header-dynamic-content">
+            
+        </nav>
+    </header>
+
+    <section class="slider">
+            <div class="slides">
+                <div class="item active" id="slide1">
+                    <img src="images/IMG_1868.JPG" alt="">
+                    <span></span>
+                </div>
+                <div class="item" id="slide2">
+                    <img src="images/IMG_1968.JPG" alt="">
+                    <span></span>
+                </div>
+                <div class="item" id="slide3">
+                    <img src="images/IMG_1870.JPG" alt="">
+                    <span></span>
+                </div>
+                <div class="item" id="slide4">
+                    <img src="images/IMG_1871.JPG" alt="">
+                    <span></span>
+                </div>
+                <div class="item" id="slide5">
+                    <img src="images/IMG_1969.PNG" alt="">
+                    <span></span>
+                </div>
+            </div>
+
+            <div class="buttons">
+                <i onclick="setSlide('slide1',1)" class="fas fa-circle"></i>
+                <i onclick="setSlide('slide2',2)" class="fas fa-circle"></i>
+                <i onclick="setSlide('slide3',3)" class="fas fa-circle"></i>
+                <i onclick="setSlide('slide4',4)" class="fas fa-circle"></i>
+                <i onclick="setSlide('slide5',5)" class="fas fa-circle"></i>
+            </div>
+        </section>
+
+    <main>
+        
+        <section class="product-sec-new row">
+                
+        </section>
+
+        <section class="supper-offer-section">
+
+        </section>
+
+        <section class="dragble-list">
+            <div class="title">
+                <span> دیگر لباس ها... </span>
+            </div>
+            <div id="owl-product" class="owl-carousel owl-theme other-clothes">
+                
+            </div>
+        </section>
+
+    </main>
+
+    <footer>
+        <div class="row">
+            <div class="col-lg-8">
+                <div class="right">
+                    <div class="title">
+                        درباره ما
+                    </div>
+                    <div class="des">
+                        Carhartt WIP | اصالت شهری، کیفیت بی‌چون‌وچرا
+<br>ما اینجا هستیم تا لباس‌ها و اکسسوری‌هایی ارائه بدیم که نه‌تنها راحت و با دوام هستن، بلکه سبک زندگی و شخصیت شما رو هم تعریف می‌کنن. هر قطعه کارهارت با دقت طراحی شده تا در خیابون‌های شهر و محیط‌های کاری سخت، همراه شما باشه.
+با ما تجربه‌ای از استایل اصیل شهری داشته باشین: از کاپشن‌ها و جلیقه‌های مقاوم گرفته تا شلوارها و اکسسوری‌های خفن که هر روزتون رو راحت‌تر و جذاب‌تر می‌کنن. کیفیت، جزئیات و دوام، همیشه در اولویت ماست.<br>
+📦 ارسال سریع و مطمئن
+<br>
+🔒 پرداخت امن و آسان
+<br>
+⭐ کیفیت تضمینی و اصالت برند
+<br>
+
+به جمع کارهارت WIP بپیوندید و سبک خودتون رو به همه نشون بدید!
+                    </div>
+                </div>   
+            </div>
+            <div class="col-lg-4">
+                <div class="left">
+                    <div class="title">
+                        ما را در شبکه های اجتماعی دنبال کنید :
+                    </div>
+                    <div class="socials">
+                        <a href=""><i class="fab fa-twitter"></i></a>
+                        <a href=""><i class="fab fa-instagram"></i></a>
+                        <a href=""><i class="fab fa-linkedin"></i></a>
+                        <a href=""><i class="fab fa-telegram-plane"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="bottom">
+                کلیه حقوق محفوظ می باشد 2025 ©
+        </div>
+    </footer>
+
+    <script src="js/main.js" type="module"></script>
+    <script>
+        const logout = () => {
+                if(confirm("آیا برای خروج مطمین هستید ؟")){
+                    localStorage.removeItem("logged-in");
+                    location.reload();
+                }
+            };
+
+            const addToCart = (id ,price ,name ,mainImage ,gallery) => {
+
+                const username = JSON.parse(localStorage.getItem("logged-in"))?.username;
+                const userData = JSON.parse(localStorage.getItem(username)) || {username, cart: []};
+                const cart = userData.cart || [];
+
+                const doesProductExistInCart = cart.some((product) => id == product.id);
+
+                if(doesProductExistInCart) alert("این محصول در سبد خرید موجود است.")
+                else {
+                    cart.push({ id: id, price: price, name: name, mainImage: mainImage,  gallery: Array.isArray(gallery) ? gallery : []});
+                    localStorage.setItem(
+                        username,
+                        JSON.stringify({username: username, cart: cart})
+                    );
+                    alert("محصول مورد نظر با موفقیت به سبد خرید اضافه شد.")
+                    location.reload();
+                }
+
+            };
+
+             const goToLogin = () => {
+                location.replace(`${location.origin}/login.html`);
+            }
+
+    </script>
+    <script
+      src="https://code.jquery.com/jquery-3.4.1.min.js"
+      integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+      crossorigin="anonymous"
+    ></script>
+    <script src="js/jquery.js"></script>
+    <script src="js/owl.carousel.min.js"></script>
+</body>
+</html>
