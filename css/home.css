@@ -213,9 +213,17 @@ header nav .nav-left .register-login-btn a{
     padding: 5px 15px;
 }
 
+
+
 .shopping-card .buttons .right .price{
     color: #666;
     font-weight: bold;
+}
+
+.shopping-card .buttons .left {
+    display: flex;
+    justify-content: center;
+    
 }
 
 .shopping-card .product-tocart-section button {
@@ -235,6 +243,40 @@ header nav .nav-left .register-login-btn a{
 .shopping-card .product-tocart-section button:hover {
     background-color: #e4e4e4;
     color: #000;
+}
+
+.shopping-card .favorite-product {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 38px;
+    height: 38px;
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+    margin-top: 3rem;
+    margin-bottom: 3rem;
+    cursor: pointer;
+    transition: all 0.25s ease-in-out;
+}
+
+.shopping-card .favorite-product i {
+    font-size: 1.2rem;
+    color: #fff;
+    -webkit-text-stroke: 1.5px black; 
+    transition: all 0.25s ease-in-out;
+}
+
+.shopping-card .favorite-product:hover i {
+    -webkit-text-stroke: 1.5px #ff4d4d; 
+    color: #ff4d4d;
+}
+
+.shopping-card .favorite-product.active {
+    background-color: #ff4d4d;
+}
+
+.shopping-card .favorite-product.active i {
+    color: #fff;
 }
 
 .product-slider {
@@ -370,6 +412,11 @@ header nav .nav-left .register-login-btn a{
     font-size: 0.8em;
 }
 
+.supper-offer-box .SOffer-buttons {
+    display: flex;
+    justify-content: center;
+}
+
 .supper-offer-box .product-tocart-section button {
     width: 60%;
     border: none;
@@ -389,7 +436,39 @@ header nav .nav-left .register-login-btn a{
     color: #000;
 }
 
+.supper-offer-box .favorite-product {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 38px;
+    height: 38px;
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+    margin-top: 3rem;
+    margin-bottom: 3rem;
+    cursor: pointer;
+    transition: all 0.25s ease-in-out;
+}
 
+.supper-offer-box .favorite-product i {
+    font-size: 1.2rem;
+    color: #fff;
+    -webkit-text-stroke: 1.5px black; 
+    transition: all 0.25s ease-in-out;
+}
+
+.supper-offer-box .favorite-product:hover i {
+    -webkit-text-stroke: 1.5px #ff4d4d; 
+    color: #ff4d4d;
+}
+
+.supper-offer-box .favorite-product.active {
+    background-color: #ff4d4d;
+}
+
+.supper-offer-box .favorite-product.active i {
+    color: #fff;
+}
 
 .banner {
     text-align: center;
