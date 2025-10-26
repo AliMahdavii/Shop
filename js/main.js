@@ -51,7 +51,7 @@ document.addEventListener("DOMContentLoaded", ()=>{
 
         const cartData = JSON.parse(localStorage.getItem(doesUserLoggedIn)) || {};
         const cart = cartData.cart || [];
-        
+
         headerDynamicContentContainer.insertAdjacentHTML(
             "beforeend",
                 `<div class="nav-right">
@@ -107,6 +107,7 @@ document.addEventListener("DOMContentLoaded", ()=>{
                         <div class="right">
                             <span class="price">${product?.price.toLocaleString()} تومان</span>
                         </div>
+                        <div class="left">
                         <div onclick='addToCart(
                         ${product?.id},
                         ${product?.price},
@@ -115,6 +116,17 @@ document.addEventListener("DOMContentLoaded", ()=>{
                         ${JSON.stringify(product?.gallery).replace(/"/g, '&quot;')}
                         )' class="product-tocart-section">
                             <button>افزودن به سبد خرید</button>
+                        </div>
+                        
+                        <div onclick='addTofavorite(
+                        ${product?.id},
+                        ${product?.price},
+                        "${product?.name.replace(/"/g, '&quot;')}",
+                        "${product?.mainImage}",
+                        ${JSON.stringify(product?.gallery).replace(/"/g, '&quot;')}
+                        )' class="favorite-product">
+                            <i class="fas fa-heart"></i>
+                        </div>
                         </div>
                     </div>
                 </div>
@@ -155,6 +167,7 @@ document.addEventListener("DOMContentLoaded", ()=>{
                                             <span id="hours">15</span>
                                         </div>
                                         <div class="remaining-time"> زمان باقی مانده تا پایان سفارش </div>
+                                        <div class="SOffer-buttons">
                                         <div onclick='addToCart(
                                         ${superOfferProduct?.id},
                                         ${superOfferProduct?.discountPrice},
@@ -163,6 +176,17 @@ document.addEventListener("DOMContentLoaded", ()=>{
                                         ${JSON.stringify(superOfferProduct?.gallery).replace(/"/g, '&quot;')}
                                         )' class="product-tocart-section">
                                             <button>افزودن به سبد خرید</button>
+                                        </div>
+
+                                        <div onclick='addTofavorite(
+                                        ${superOfferProduct?.id},
+                                        ${superOfferProduct?.price},
+                                        "${superOfferProduct?.name.replace(/"/g, '&quot;')}",
+                                        "${superOfferProduct?.mainImage}",
+                                        ${JSON.stringify(superOfferProduct?.gallery).replace(/"/g, '&quot;')}
+                                        )' class="favorite-product">
+                                            <i class="fas fa-heart"></i>
+                                        </div>
                                         </div>
                                     </div>
                                 </div>
@@ -209,6 +233,7 @@ document.addEventListener("DOMContentLoaded", ()=>{
                         <div class="right">
                             <span class="price">${otherProduct?.price.toLocaleString()} تومان</span>
                         </div>
+                        <div class="left">
                         <div onclick='addToCart(
                         ${otherProduct?.id},
                         ${otherProduct?.price},
@@ -217,6 +242,17 @@ document.addEventListener("DOMContentLoaded", ()=>{
                         ${JSON.stringify(otherProduct?.gallery).replace(/"/g, '&quot;')}
                         )' class="product-tocart-section">
                             <button>افزودن به سبد خرید</button>
+                        </div>
+                        
+                        <div onclick='addTofavorite(
+                        ${otherProduct?.id},
+                        ${otherProduct?.price},
+                        "${otherProduct?.name.replace(/"/g, '&quot;')}",
+                        "${otherProduct?.mainImage}",
+                        ${JSON.stringify(otherProduct?.gallery).replace(/"/g, '&quot;')}
+                        )' class="favorite-product">
+                            <i class="fas fa-heart"></i>
+                        </div>
                         </div>
                     </div>
                 </div>
@@ -310,10 +346,22 @@ document.addEventListener("DOMContentLoaded", ()=>{
                         <div class="right">
                             <span class="price">${product?.price.toLocaleString()} تومان</span>
                         </div>
+                        <div class="left">
                         <div onclick="goToLogin()" class="product-tocart-section">
                             <button>
                                 وارد حساب کاربری شوید
                             </button>
+                        </div>
+
+                        <div onclick='addTofavorite(
+                        ${product?.id},
+                        ${product?.price},
+                        "${product?.name.replace(/"/g, '&quot;')}",
+                        "${product?.mainImage}",
+                        ${JSON.stringify(product?.gallery).replace(/"/g, '&quot;')}
+                        )' class="favorite-product">
+                            <i class="fas fa-heart"></i>
+                        </div>
                         </div>
                     </div>
                 </div>
@@ -350,11 +398,23 @@ document.addEventListener("DOMContentLoaded", ()=>{
                         <div class="right">
                             <span class="price">${otherProduct?.price.toLocaleString()} تومان</span>
                         </div>
+                        <div class="left">
                         <div onclick="goToLogin()" class="product-tocart-section padding-1">
                         <button>
                             وارد حساب کاربری شوید
                         </button>
                     </div>
+                    
+                    <div onclick='addTofavorite(
+                        ${otherProduct?.id},
+                        ${otherProduct?.price},
+                        "${otherProduct?.name.replace(/"/g, '&quot;')}",
+                        "${otherProduct?.mainImage}",
+                        ${JSON.stringify(otherProduct?.gallery).replace(/"/g, '&quot;')}
+                        )' class="favorite-product">
+                            <i class="fas fa-heart"></i>
+                        </div>
+                        </div>
                     </div>
                 </div>
                 </div>`
@@ -395,10 +455,22 @@ document.addEventListener("DOMContentLoaded", ()=>{
                                             <span id="hours">15</span>
                                         </div>
                                         <div class="remaining-time"> زمان باقی مانده تا پایان سفارش </div>
+                                        <div class="SOffer-buttons">
                                         <div onclick="goToLogin()" class="product-tocart-section">
                                             <button>
                                                 وارد حساب کاربری شوید
                                             </button>
+                                        </div>
+
+                                        <div onclick='addTofavorite(
+                                        ${superOfferProduct?.id},
+                                        ${superOfferProduct?.price},
+                                        "${superOfferProduct?.name.replace(/"/g, '&quot;')}",
+                                        "${superOfferProduct?.mainImage}",
+                                        ${JSON.stringify(superOfferProduct?.gallery).replace(/"/g, '&quot;')}
+                                        )' class="favorite-product">
+                                            <i class="fas fa-heart"></i>
+                                        </div>
                                         </div>
                                     </div>
                                 </div>
