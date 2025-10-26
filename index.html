@@ -148,6 +148,38 @@
                 location.replace(`${location.origin}/login.html`);
             }
 
+            function addTofavorite(id, price, name, mainImage, gallery = []) {
+                    const loggedInUser = JSON.parse(localStorage.getItem("logged-in"))?.username;
+
+                if (!loggedInUser) {
+                    alert("ابتدا وارد حساب کاربری خود شوید!");
+                    window.location.href = "login.html";
+                    return;
+                }
+
+                    const userData = JSON.parse(localStorage.getItem(loggedInUser)) || { cart: [], favorites: [] };
+
+                if (!Array.isArray(userData.favorites)) {
+                    userData.favorites = [];
+                }
+
+                    const isAlreadyFavorite = userData.favorites.some(product => product.id === id);
+
+                if (isAlreadyFavorite) {
+                    alert("این محصول قبلاً در لیست علاقه‌مندی‌های شما وجود دارد ❤️");
+                    return;
+                }
+
+    
+                    const newFavorite = { id, price, name, mainImage, gallery };
+
+            userData.favorites.push(newFavorite);
+
+            localStorage.setItem(loggedInUser, JSON.stringify(userData));
+
+        alert("محصول با موفقیت به لیست علاقه‌مندی‌های شما اضافه شد ");
+}
+
     </script>
     <script
       src="https://code.jquery.com/jquery-3.4.1.min.js"
