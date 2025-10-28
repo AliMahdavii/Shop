@@ -117,8 +117,9 @@ document.addEventListener("DOMContentLoaded", ()=>{
                         )' class="product-tocart-section">
                             <button>افزودن به سبد خرید</button>
                         </div>
-                        
-                        <div onclick='addTofavorite(
+
+                        <div data-id="${product?.id}" onclick='addTofavorite(
+                        this,
                         ${product?.id},
                         ${product?.price},
                         "${product?.name.replace(/"/g, '&quot;')}",
@@ -178,7 +179,8 @@ document.addEventListener("DOMContentLoaded", ()=>{
                                             <button>افزودن به سبد خرید</button>
                                         </div>
 
-                                        <div onclick='addTofavorite(
+                                        <div data-id="${superOfferProduct?.id}" onclick='addTofavorite(
+                                        this,
                                         ${superOfferProduct?.id},
                                         ${superOfferProduct?.price},
                                         "${superOfferProduct?.name.replace(/"/g, '&quot;')}",
@@ -244,7 +246,8 @@ document.addEventListener("DOMContentLoaded", ()=>{
                             <button>افزودن به سبد خرید</button>
                         </div>
                         
-                        <div onclick='addTofavorite(
+                        <div data-id="${otherProduct?.id}" onclick='addTofavorite(
+                        this,
                         ${otherProduct?.id},
                         ${otherProduct?.price},
                         "${otherProduct?.name.replace(/"/g, '&quot;')}",
@@ -291,7 +294,8 @@ document.addEventListener("DOMContentLoaded", ()=>{
     index = (index + 1) % imgs.length;
     showImage(index);
   });
-});       
+});
+
 
     } else{
         headerDynamicContentContainer.insertAdjacentHTML(
@@ -354,6 +358,7 @@ document.addEventListener("DOMContentLoaded", ()=>{
                         </div>
 
                         <div onclick='addTofavorite(
+                        this,
                         ${product?.id},
                         ${product?.price},
                         "${product?.name.replace(/"/g, '&quot;')}",
@@ -406,6 +411,7 @@ document.addEventListener("DOMContentLoaded", ()=>{
                     </div>
                     
                     <div onclick='addTofavorite(
+                        this,
                         ${otherProduct?.id},
                         ${otherProduct?.price},
                         "${otherProduct?.name.replace(/"/g, '&quot;')}",
@@ -463,6 +469,7 @@ document.addEventListener("DOMContentLoaded", ()=>{
                                         </div>
 
                                         <div onclick='addTofavorite(
+                                        this,
                                         ${superOfferProduct?.id},
                                         ${superOfferProduct?.price},
                                         "${superOfferProduct?.name.replace(/"/g, '&quot;')}",
@@ -520,5 +527,36 @@ document.addEventListener("DOMContentLoaded", ()=>{
   });
 });
 
+document.addEventListener("DOMContentLoaded", () => {
+    const loggedInUser = JSON.parse(localStorage.getItem("logged-in"))?.username;
+    if (!loggedInUser) return;
+
+    const favorites = JSON.parse(localStorage.getItem(loggedInUser))?.favorites || [];
+
+    favorites.forEach(fav => {
+        const favElement = document.querySelector(`.favorite-product[data-id="${fav.id}"]`);
+        if (favElement) {
+            favElement.classList.add("active");
+            favElement.querySelector("i").classList.remove("far");
+            favElement.querySelector("i").classList.add("fas");
+        }
+    });
+});
+
+
     }
+});
+
+document.addEventListener("DOMContentLoaded", () => {
+    const loggedInUser = JSON.parse(localStorage.getItem("logged-in"))?.username;
+    if (!loggedInUser) return;
+
+    const favorites = JSON.parse(localStorage.getItem(loggedInUser))?.favorites || [];
+
+    favorites.forEach(fav => {
+        const favElement = document.querySelector(`.favorite-product[data-id="${fav.id}"]`);
+        if (favElement) {
+            favElement.classList.add("active");
+        }
+    });
 });
