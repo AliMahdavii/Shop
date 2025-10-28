@@ -272,11 +272,12 @@ header nav .nav-left .register-login-btn a{
 }
 
 .shopping-card .favorite-product.active {
-    background-color: #ff4d4d;
+    background-color: transparent;
 }
 
 .shopping-card .favorite-product.active i {
-    color: #fff;
+    color: #ff4d4d; 
+    -webkit-text-stroke: 0;
 }
 
 .product-slider {
@@ -463,11 +464,12 @@ header nav .nav-left .register-login-btn a{
 }
 
 .supper-offer-box .favorite-product.active {
-    background-color: #ff4d4d;
+    background-color: transparent;
 }
 
 .supper-offer-box .favorite-product.active i {
-    color: #fff;
+    color: #ff4d4d; 
+    -webkit-text-stroke: 0;
 }
 
 .banner {
