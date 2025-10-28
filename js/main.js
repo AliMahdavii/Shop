@@ -55,7 +55,7 @@ document.addEventListener("DOMContentLoaded", ()=>{
         headerDynamicContentContainer.insertAdjacentHTML(
             "beforeend",
                 `<div class="nav-right">
-            <a href=""><i class="fa-solid fa-user"></i></a>
+            <a href="profile.html"><i class="fa-solid fa-user"></i></a>
             <a href="cart.html"><i class="fa-solid fa-cart-shopping">
                 <span id="cart-badge">${cart.length}</span>
             </i></a>
