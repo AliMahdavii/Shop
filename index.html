@@ -123,26 +123,37 @@
                 }
             };
 
-            const addToCart = (id ,price ,name ,mainImage ,gallery) => {
-
+            const addToCart = (id, price, name, mainImage, gallery) => {
                 const username = JSON.parse(localStorage.getItem("logged-in"))?.username;
-                const userData = JSON.parse(localStorage.getItem(username)) || {username, cart: []};
-                const cart = userData.cart || [];
-
-                const doesProductExistInCart = cart.some((product) => id == product.id);
-
-                if(doesProductExistInCart) alert("این محصول در سبد خرید موجود است.")
-                else {
-                    cart.push({ id: id, price: price, name: name, mainImage: mainImage,  gallery: Array.isArray(gallery) ? gallery : []});
-                    localStorage.setItem(
-                        username,
-                        JSON.stringify({username: username, cart: cart})
-                    );
-                    alert("محصول مورد نظر با موفقیت به سبد خرید اضافه شد.")
-                    location.reload();
+                if (!username) {
+                    alert("ابتدا وارد حساب کاربری خود شوید!");
+                    return;
                 }
 
-            };
+            const userData = JSON.parse(localStorage.getItem(username)) || { username, cart: [], favorites: [] };
+            const cart = userData.cart || [];
+
+            const doesProductExistInCart = cart.some((product) => id == product.id);
+
+            if (doesProductExistInCart) {
+                alert("این محصول در سبد خرید موجود است.");
+            } else {
+                cart.push({
+                    id,
+                    price,
+                    name,
+                    mainImage,
+                    gallery: Array.isArray(gallery) ? gallery : [],
+                });
+            
+                userData.cart = cart;
+            
+                localStorage.setItem(username, JSON.stringify(userData));
+                alert("محصول مورد نظر با موفقیت به سبد خرید اضافه شد.");
+                location.reload();
+            }
+};
+
 
              const goToLogin = () => {
                 location.replace(`${location.origin}/login.html`);
