@@ -144,6 +144,7 @@ body{
   border-radius: 10px;
   cursor: pointer;
   margin-top: 2rem;
+  margin-bottom: 1rem;
   transition: background 0.3s;
 }
 
@@ -155,4 +156,18 @@ body{
   text-align: center;
   color: #777;
   font-size: 0.95rem;
+}
+
+.back {
+    color: #888;
+    font-size: 0.7rem;
+    padding: 0.8rem;
+}
+
+a{
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
 }
