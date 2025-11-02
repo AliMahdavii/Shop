@@ -159,33 +159,44 @@
                 location.replace(`${location.origin}/login.html`);
             }
 
-            function addTofavorite(element, id, price, name, mainImage, gallery = []) {
-    const loggedInUser = JSON.parse(localStorage.getItem("logged-in"))?.username;
+    function addTofavorite(element, id, price, name, mainImage, gallery = []) {
+        const loggedInUser = JSON.parse(localStorage.getItem("logged-in"))?.username;
+                
+        if (!loggedInUser) {
+            alert("ابتدا وارد حساب کاربری خود شوید!");
+            window.location.href = "login.html";
+            return;
+        }
+    
+        const userData = JSON.parse(localStorage.getItem(loggedInUser)) || {username: loggedInUser, cart: [], favorites: [] };
+    
+        if (!Array.isArray(userData.favorites)) {
+            userData.favorites = [];
+        }
 
-    if (!loggedInUser) {
-        alert("ابتدا وارد حساب کاربری خود شوید!");
-        window.location.href = "login.html";
-        return;
-    }
+        const idx = userData.favorites.findIndex(p => String(p.id) === String(id));
+        const icon = element.querySelector("i");
 
-    const userData = JSON.parse(localStorage.getItem(loggedInUser)) || { cart: [], favorites: [] };
+        if(idx !== -1){
+            userData.favorites.splice(idx,1);
+            element.classList.remove("active");
 
-    if (!Array.isArray(userData.favorites)) {
-        userData.favorites = [];
-    }
+            if(icon){
+            icon.style.color = "#fff";
+            icon.style.webkitTextStroke = "1.5px black";
+            }
+        } else{
+            const newFavorite = { id, price, name, mainImage, gallery };
+            userData.favorites.push(newFavorite);
+            element.classList.add("active");
 
-    const isAlreadyFavorite = userData.favorites.some(product => product.id === id);
-
-    if (isAlreadyFavorite) {
-        userData.favorites = userData.favorites.filter(product => product.id !== id);
-        element.classList.remove("active");
-    } else {
-        const newFavorite = { id, price, name, mainImage, gallery };
-        userData.favorites.push(newFavorite);
-        element.classList.add("active");
-    }
-
-    localStorage.setItem(loggedInUser, JSON.stringify(userData));
+            if(icon){
+                icon.style.color = "#ff4d4d";
+                icon.style.webkitTextStroke = "0px";
+            }
+        }
+    
+        localStorage.setItem(loggedInUser, JSON.stringify(userData));
 }
 
 
