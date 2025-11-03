@@ -8,6 +8,7 @@ export const superOfferProducts = [
             "images/5/IMG_1934.AVIF",
             "images/5/IMG_1935.AVIF"
         ],
+        description : "hi",
         stars: 5,
         id: "5"
     }
