@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/product.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <title>Document</title>
+</head>
+<body>
+    <div class="product-container">
+        <div class="product-main">
+            <img src="" id="mainImage" alt="">
+        </div>
+
+        <div class="product-gallery" id="gallery"></div>
+
+        <div class="product-info">
+            <h2 id="name"></h2>
+            <span class="price" id="price"></span>
+            <p class="description"></p>
+
+            <div class="buttons">
+                <button id="addToCart">افزودن به سبد خرید</button>
+                <button id="addTofavorite"><i class="fas fa-heart"></i></button>
+            </div>
+        </div>
+    </div>
+    <script type="module">
+        import products from "./js/constants/product.js";
+import superOfferProducts from "./js/constants/supperOfferProduct.js";
+import otherProducts from "./js/constants/otherProducts.js";
+
+const allProducts = [...products, ...superOfferProducts, ...otherProducts];
+
+const params = new URLSearchParams(window.location.search);
+const productId = params.get("id");
+
+const product = allProducts.find(p => String(p.id) === String(productId));
+
+if (!product) {
+    document.body.innerHTML = "<p style='text-align:center;'>محصولی یافت نشد ❌</p>";
+} else {
+    document.getElementById("mainImage").src = product.mainImage;
+    document.getElementById("name").textContent = product.name;
+    document.getElementById("price").textContent = product.price.toLocaleString();
+    document.querySelector(".description").textContent = product.description || "";
+
+    const galleryEl = document.getElementById("gallery");
+    galleryEl.innerHTML = product.gallery
+        .map(img => `<img src="${img}" onclick="document.getElementById('mainImage').src='${img}'">`)
+        .join("");
+
+    document.getElementById("addToCart").addEventListener("click", () => {
+        addToCart(product.id, product.price, product.name, product.mainImage, product.gallery);
+    });
+
+    const favBtn = document.getElementById("addTofavorite");
+    favBtn.addEventListener("click", () => {
+        addTofavorite(favBtn, product.id, product.price, product.name, product.mainImage, product.gallery);
+    });
+
+    const loggedInUser = JSON.parse(localStorage.getItem("logged-in"))?.username;
+    if (loggedInUser) {
+        const userData = JSON.parse(localStorage.getItem(loggedInUser));
+        const isFav = userData?.favorites?.some(p => String(p.id) === String(product.id));
+        if (isFav) {
+            favBtn.classList.add("active");
+            favBtn.querySelector("i").style.color = "#ff4d4d";
+            favBtn.querySelector("i").style.webkitTextStroke = "0";
+        }
+    }
+}
+
+function addTofavorite(element, id, price, name, mainImage, gallery = []) {
+    const loggedInUser = JSON.parse(localStorage.getItem("logged-in"))?.username;
+    if (!loggedInUser) {
+        alert("ابتدا وارد حساب کاربری خود شوید!");
+        window.location.href = "login.html";
+        return;
+    }
+
+    const userData = JSON.parse(localStorage.getItem(loggedInUser)) || {
+        username: loggedInUser,
+        cart: [],
+        favorites: []
+    };
+
+    if (!Array.isArray(userData.favorites)) {
+        userData.favorites = [];
+    }
+
+    const idx = userData.favorites.findIndex(p => String(p.id) === String(id));
+    const icon = element.querySelector("i");
+
+    if (idx !== -1) {
+        userData.favorites.splice(idx, 1);
+        element.classList.remove("active");
+        if (icon) {
+            icon.style.color = "#fff";
+            icon.style.webkitTextStroke = "1.5px black";
+        }
+    } else {
+        userData.favorites.push({ id, price, name, mainImage, gallery });
+        element.classList.add("active");
+        if (icon) {
+            icon.style.color = "#ff4d4d";
+            icon.style.webkitTextStroke = "0";
+        }
+    }
+
+    localStorage.setItem(loggedInUser, JSON.stringify(userData));
+}
+
+function addToCart(id, price, name, mainImage, gallery) {
+    const username = JSON.parse(localStorage.getItem("logged-in"))?.username;
+    if (!username) {
+        alert("ابتدا وارد حساب کاربری خود شوید!");
+        return;
+    }
+
+    const userData = JSON.parse(localStorage.getItem(username)) || { username, cart: [], favorites: [] };
+    const cart = userData.cart || [];
+
+    const doesProductExistInCart = cart.some((product) => id == product.id);
+
+    if (doesProductExistInCart) {
+        alert("این محصول در سبد خرید موجود است.");
+    } else {
+        cart.push({
+            id,
+            price,
+            name,
+            mainImage,
+            gallery: Array.isArray(gallery) ? gallery : [],
+        });
+
+        userData.cart = cart;
+        localStorage.setItem(username, JSON.stringify(userData));
+        alert("محصول با موفقیت به سبد خرید اضافه شد.");
+        location.reload();
+    }
+}
+
+
+    </script>
+
+</body>
+</html>
