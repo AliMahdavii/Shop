@@ -10,6 +10,7 @@ export const products = [
             "images/1/IMG_1901.AVIF",
             "images/1/IMG_1902.AVIF"
         ],
+        description : "hi",
         stars: 4,
         isHotOffer: true,
         id: "1"
@@ -25,6 +26,7 @@ export const products = [
             "images/2/IMG_1922.AVIF",
             "images/2/IMG_1923.AVIF"
         ],
+        description : "hi",
         stars: 4,
         isHotOffer: false,
         id: "2"
@@ -41,6 +43,7 @@ export const products = [
             "images/3/IMG_1913.AVIF",
             "images/3/IMG_1914.AVIF"
         ],
+        description : "hi",
         stars: 3,
         isHotOffer: true,
         id: "3"
@@ -56,6 +59,7 @@ export const products = [
             "images/4/IMG_1907.AVIF",
             "images/4/IMG_1907.AVIF"
         ],
+        description : "hi",
         stars: 5,
         isHotOffer: false,
         id: "4"
