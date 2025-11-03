@@ -199,7 +199,10 @@
         localStorage.setItem(loggedInUser, JSON.stringify(userData));
 }
 
-
+    function openProduct(id){
+        window.location.href = `product.html?id=${id}`;
+    }
+    
     </script>
     <script
       src="https://code.jquery.com/jquery-3.4.1.min.js"
