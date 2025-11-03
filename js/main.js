@@ -82,7 +82,7 @@ document.addEventListener("DOMContentLoaded", ()=>{
             productSecNew.insertAdjacentHTML(
                 "beforeend",
                 `<div class="col-lg-3 col-md-4 col-sm-6 col-xs-12">
-                    <div class="shopping-card">
+                    <div class="shopping-card" onclick="openProduct('${product?.id}')">
                     <div class="img-sec">
                         <div class="product-slider">
                             <img src="${product?.mainImage}" alt="" class="active">
@@ -139,7 +139,7 @@ document.addEventListener("DOMContentLoaded", ()=>{
                 "beforeend",
                 `<div class="row">
                 <div class="col-lg-9">
-                    <div class="supper-offer-box">
+                    <div class="supper-offer-box" onclick="openProduct('${superOfferProduct?.id}')">
                         <span class="supper-offer-box-title"> پیشنهاد شگفت انگیز </span>
                         <div class="body">
                             <div class="row">
@@ -210,7 +210,7 @@ document.addEventListener("DOMContentLoaded", ()=>{
             otherClothes.insertAdjacentHTML(
                 "beforeend",
                 `<div class="item">
-                    <div class="shopping-card">
+                    <div class="shopping-card" onclick="openProduct('${otherProduct?.id}')">
                     <div class="img-sec">
                         <div class="product-slider">
                             <img src="${otherProduct?.mainImage}" alt="" class="active">
@@ -325,7 +325,7 @@ document.addEventListener("DOMContentLoaded", ()=>{
             productSecNew.insertAdjacentHTML(
                 "beforeend",
                 `<div class="col-lg-3 col-md-4 col-sm-6 col-xs-12">
-                    <div class="shopping-card">
+                    <div class="shopping-card" onclick="openProduct('${product?.id}')">
                     <div class="img-sec">
                         <div class="product-slider">
                             <img src="${product?.mainImage}" alt="" class="active">
@@ -378,7 +378,7 @@ document.addEventListener("DOMContentLoaded", ()=>{
             otherClothes.insertAdjacentHTML(
                 "beforeend",
                 `<div class="item">
-                    <div class="shopping-card">
+                    <div class="shopping-card" onclick="openProduct('${otherProduct?.id}')">
                     <div class="img-sec">
                         <div class="product-slider">
                             <img src="${otherProduct?.mainImage}" alt="" class="active">
@@ -432,7 +432,7 @@ document.addEventListener("DOMContentLoaded", ()=>{
                 "beforeend",
                 `<div class="row">
                 <div class="col-lg-9">
-                    <div class="supper-offer-box">
+                    <div class="supper-offer-box" onclick="openProduct('${superOfferProduct?.id}')">
                         <span class="supper-offer-box-title"> پیشنهاد شگفت انگیز </span>
                         <div class="body">
                             <div class="row">
