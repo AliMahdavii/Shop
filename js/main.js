@@ -71,11 +71,34 @@ document.addEventListener("DOMContentLoaded", ()=>{
         </div>`
         );
 
-        document.getElementById("search-btn").addEventListener("click", () => {
-            const searchBox = document.getElementById("search-box");
-            searchBox.style.display = searchBox.style.display === "none" ? "inline-block" : "none";
-        if (searchBox.style.display === "inline-block") searchBox.focus();
-});
+        const searchBtn = document.getElementById("search-btn");
+        const searchBox = document.getElementById("search-box");
+
+        searchBtn.addEventListener("click", () => {
+
+            if (searchBox.style.display === "none" || searchBox.style.display === "") {
+            searchBox.style.display = "inline-block";
+            searchBox.focus();
+          } else {
+
+            const query = searchBox.value.trim();
+            if (query) {
+              window.location.href = `search.html?q=${encodeURIComponent(query)}`;
+            } else {
+
+                searchBox.style.display = "none";
+            }
+          }
+    });
+
+  searchBox.addEventListener("keypress", (e) => {
+    if (e.key === "Enter") {
+      const query = searchBox.value.trim();
+      if (query) {
+        window.location.href = `search.html?q=${encodeURIComponent(query)}`;
+      }
+    }
+  });
 
 
         products.map((product) => {
@@ -264,29 +287,6 @@ document.addEventListener("DOMContentLoaded", ()=>{
     }
   });
   });
-
-  document.querySelectorAll(".product-slider").forEach(slider => {
-  const imgs = slider.querySelectorAll("img");
-  const prev = slider.querySelector(".prev");
-  const next = slider.querySelector(".next");
-  let index = 0;
-
-  function showImage(i) {
-    imgs.forEach(img => img.classList.remove("active"));
-    imgs[i].classList.add("active");
-  }
-
-  prev.addEventListener("click", () => {
-    index = (index - 1 + imgs.length) % imgs.length;
-    showImage(index);
-  });
-
-  next.addEventListener("click", () => {
-    index = (index + 1) % imgs.length;
-    showImage(index);
-  });
-});
-
 
     } else{
         headerDynamicContentContainer.insertAdjacentHTML(
