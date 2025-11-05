@@ -87,9 +87,6 @@ document.addEventListener("DOMContentLoaded", ()=>{
                         <div class="product-slider">
                             <img src="${product?.mainImage}" alt="" class="active">
                             ${product?.gallery.map(img => `<img src="${img}" alt="">`).join('')}
-
-                            <button class="prev">&#10095;</button>
-                            <button class="next">&#10094;</button>
                         </div>
                         ${product.isHotOffer?`<span class="hot-offer">پیشنهاد ویژه</span>`:""}
                         <div class="stars" data-rating="${product?.stars}">
@@ -108,7 +105,7 @@ document.addEventListener("DOMContentLoaded", ()=>{
                             <span class="price">${product?.price.toLocaleString()} تومان</span>
                         </div>
                         <div class="left">
-                        <div onclick='addToCart(
+                        <div onclick='event.stopPropagation(), addToCart(
                         ${product?.id},
                         ${product?.price},
                         "${product?.name.replace(/"/g, '&quot;')}",
@@ -118,7 +115,7 @@ document.addEventListener("DOMContentLoaded", ()=>{
                             <button>افزودن به سبد خرید</button>
                         </div>
 
-                        <div data-id="${product?.id}" onclick='addTofavorite(
+                        <div data-id="${product?.id}" onclick='event.stopPropagation(), addTofavorite(
                         this,
                         ${product?.id},
                         ${product?.price},
@@ -148,9 +145,6 @@ document.addEventListener("DOMContentLoaded", ()=>{
                                         <div class="product-slider">
                             <img src="${superOfferProduct?.mainImage}" alt="" class="active">
                             ${superOfferProduct?.gallery.map(img => `<img src="${img}" alt="">`).join('')}
-
-                            <button class="prev">&#10095;</button>
-                            <button class="next">&#10094;</button>
                         </div>
                                     </div>
                                 </div>
@@ -169,7 +163,7 @@ document.addEventListener("DOMContentLoaded", ()=>{
                                         </div>
                                         <div class="remaining-time"> زمان باقی مانده تا پایان سفارش </div>
                                         <div class="SOffer-buttons">
-                                        <div onclick='addToCart(
+                                        <div onclick='event.stopPropagation(), addToCart(
                                         ${superOfferProduct?.id},
                                         ${superOfferProduct?.discountPrice},
                                         "${superOfferProduct?.name.replace(/"/g, '&quot;')}",
@@ -179,7 +173,7 @@ document.addEventListener("DOMContentLoaded", ()=>{
                                             <button>افزودن به سبد خرید</button>
                                         </div>
 
-                                        <div data-id="${superOfferProduct?.id}" onclick='addTofavorite(
+                                        <div data-id="${superOfferProduct?.id}" onclick='event.stopPropagation(), addTofavorite(
                                         this,
                                         ${superOfferProduct?.id},
                                         ${superOfferProduct?.price},
@@ -215,9 +209,6 @@ document.addEventListener("DOMContentLoaded", ()=>{
                         <div class="product-slider">
                             <img src="${otherProduct?.mainImage}" alt="" class="active">
                             ${otherProduct?.gallery.map(img => `<img src="${img}" alt="">`).join('')}
-
-                            <button class="prev">&#10095;</button>
-                            <button class="next">&#10094;</button>
                         </div>
                         ${otherProduct.isHotOffer?`<span class="hot-offer">پیشنهاد ویژه</span>`:""}
                         <div class="stars" data-rating="${otherProduct?.stars}">
@@ -236,7 +227,7 @@ document.addEventListener("DOMContentLoaded", ()=>{
                             <span class="price">${otherProduct?.price.toLocaleString()} تومان</span>
                         </div>
                         <div class="left">
-                        <div onclick='addToCart(
+                        <div onclick='event.stopPropagation(), addToCart(
                         ${otherProduct?.id},
                         ${otherProduct?.price},
                         "${otherProduct?.name.replace(/"/g, '&quot;')}",
@@ -246,7 +237,7 @@ document.addEventListener("DOMContentLoaded", ()=>{
                             <button>افزودن به سبد خرید</button>
                         </div>
                         
-                        <div data-id="${otherProduct?.id}" onclick='addTofavorite(
+                        <div data-id="${otherProduct?.id}" onclick='event.stopPropagation(), addTofavorite(
                         this,
                         ${otherProduct?.id},
                         ${otherProduct?.price},
@@ -330,9 +321,6 @@ document.addEventListener("DOMContentLoaded", ()=>{
                         <div class="product-slider">
                             <img src="${product?.mainImage}" alt="" class="active">
                             ${product?.gallery.map(img => `<img src="${img}" alt="">`).join('')}
-
-                            <button class="prev">&#10095;</button>
-                            <button class="next">&#10094;</button>
                         </div>
                         ${product.isHotOffer?`<span class="hot-offer">پیشنهاد ویژه</span>`:""}
                         <div class="stars" data-rating="${product?.stars}">
@@ -351,13 +339,13 @@ document.addEventListener("DOMContentLoaded", ()=>{
                             <span class="price">${product?.price.toLocaleString()} تومان</span>
                         </div>
                         <div class="left">
-                        <div onclick="goToLogin()" class="product-tocart-section">
+                        <div onclick="event.stopPropagation(), goToLogin()" class="product-tocart-section">
                             <button>
                                 وارد حساب کاربری شوید
                             </button>
                         </div>
 
-                        <div onclick='addTofavorite(
+                        <div onclick='event.stopPropagation(), addTofavorite(
                         this,
                         ${product?.id},
                         ${product?.price},
@@ -383,9 +371,6 @@ document.addEventListener("DOMContentLoaded", ()=>{
                         <div class="product-slider">
                             <img src="${otherProduct?.mainImage}" alt="" class="active">
                             ${otherProduct?.gallery.map(img => `<img src="${img}" alt="">`).join('')}
-
-                            <button class="prev">&#10095;</button>
-                            <button class="next">&#10094;</button>
                         </div>
                         ${otherProduct.isHotOffer?`<span class="hot-offer">پیشنهاد ویژه</span>`:""}
                         <div class="stars" data-rating="${otherProduct?.stars}">
@@ -404,13 +389,13 @@ document.addEventListener("DOMContentLoaded", ()=>{
                             <span class="price">${otherProduct?.price.toLocaleString()} تومان</span>
                         </div>
                         <div class="left">
-                        <div onclick="goToLogin()" class="product-tocart-section padding-1">
+                        <div onclick="event.stopPropagation(), goToLogin()" class="product-tocart-section padding-1">
                         <button>
                             وارد حساب کاربری شوید
                         </button>
                     </div>
                     
-                    <div onclick='addTofavorite(
+                    <div onclick='event.stopPropagation(), addTofavorite(
                         this,
                         ${otherProduct?.id},
                         ${otherProduct?.price},
@@ -441,9 +426,6 @@ document.addEventListener("DOMContentLoaded", ()=>{
                                         <div class="product-slider">
                             <img src="${superOfferProduct?.mainImage}" alt="" class="active">
                             ${superOfferProduct?.gallery.map(img => `<img src="${img}" alt="">`).join('')}
-
-                            <button class="prev">&#10095;</button>
-                            <button class="next">&#10094;</button>
                         </div>
                                     </div>
                                 </div>
@@ -462,13 +444,13 @@ document.addEventListener("DOMContentLoaded", ()=>{
                                         </div>
                                         <div class="remaining-time"> زمان باقی مانده تا پایان سفارش </div>
                                         <div class="SOffer-buttons">
-                                        <div onclick="goToLogin()" class="product-tocart-section">
+                                        <div onclick="event.stopPropagation(), goToLogin()" class="product-tocart-section">
                                             <button>
                                                 وارد حساب کاربری شوید
                                             </button>
                                         </div>
 
-                                        <div onclick='addTofavorite(
+                                        <div onclick='event.stopPropagation(), addTofavorite(
                                         this,
                                         ${superOfferProduct?.id},
                                         ${superOfferProduct?.price},
@@ -504,28 +486,6 @@ document.addEventListener("DOMContentLoaded", ()=>{
           }
         });
       });
-
-      document.querySelectorAll(".product-slider").forEach(slider => {
-  const imgs = slider.querySelectorAll("img");
-  const prev = slider.querySelector(".prev");
-  const next = slider.querySelector(".next");
-  let index = 0;
-
-  function showImage(i) {
-    imgs.forEach(img => img.classList.remove("active"));
-    imgs[i].classList.add("active");
-  }
-
-  prev.addEventListener("click", () => {
-    index = (index - 1 + imgs.length) % imgs.length;
-    showImage(index);
-  });
-
-  next.addEventListener("click", () => {
-    index = (index + 1) % imgs.length;
-    showImage(index);
-  });
-});
 
 document.addEventListener("DOMContentLoaded", () => {
     const loggedInUser = JSON.parse(localStorage.getItem("logged-in"))?.username;
