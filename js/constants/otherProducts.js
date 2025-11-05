@@ -7,7 +7,8 @@ export const otherProducts = [
             "images/6/IMG_1937.AVIF",
             "images/6/IMG_1938.AVIF"
         ],
-        description : "hi",
+        category: "ژاکت",
+        description : "ژاکتی نرم و گرم از الیاف باکیفیت، ایده‌آل برای روزهای خنک پاییز و زمستان. راحت، ساده و همیشه شیک.",
         stars: 2,
         isHotOffer: true,
         id: "6"
@@ -22,7 +23,8 @@ export const otherProducts = [
             "images/7/IMG_1942.AVIF",
             "images/7/IMG_1943.AVIF"
         ],
-        description : "hi",
+        category: "شلوار",
+        description : "شلواری راحت و خوش‌دوخت، مناسب استفاده روزمره و استایل خیابانی. ترکیب عالی از سادگی و راحتی برای هر موقعیتی.",
         stars: 4,
         isHotOffer: false,
         id: "7"
@@ -35,7 +37,8 @@ export const otherProducts = [
             "images/8/IMG_1965.AVIF",
             "images/8/IMG_1966.AVIF"
         ],
-        description : "hi",
+        category: "کوله پشتی",
+        description : "کوله‌پشتی جادار و بادوام با طراحی کاربردی. مناسب دانشگاه، سفر یا استفاده روزمره با دوخت مستحکم و ظاهر مدرن.",
         stars: 3,
         isHotOffer: false,
         id: "8"
@@ -47,7 +50,8 @@ export const otherProducts = [
         gallery: [
             "images/9/IMG_1962.AVIF"
         ],
-        description : "hi",
+        category: "کلاه",
+        description : "کلاهی سبک و راحت با جنس باکیفیت، مناسب روزهای آفتابی یا تکمیل استایل اسپرت. هم کاربردی هم فشن.",
         stars: 3,
         isHotOffer: false,
         id: "9"
@@ -62,7 +66,8 @@ export const otherProducts = [
             "images/10/IMG_1958.AVIF",
             "images/10/IMG_1959.AVIF"
         ],
-        description : "hi",
+        category: "شلوارک",
+        description : "شلوارکی خنک و سبک، مناسب روزهای گرم تابستان و فعالیت‌های روزمره. راحتی همراه با استایل مینیمال.",
         stars: 3,
         isHotOffer: false,
         id: "10"
@@ -77,7 +82,8 @@ export const otherProducts = [
             "images/11/IMG_1948.AVIF",
             "images/11/IMG_1949.AVIF"
         ],
-        description : "hi",
+        category: "کیف دستی ",
+        description : "کیف دستی ظریف با طراحی مینیمال و دوخت دقیق، مناسب برای استفاده روزمره یا موقعیت‌های خاص. سبک و در عین حال جادار.",
         stars: 3,
         isHotOffer: true,
         id: "11"
