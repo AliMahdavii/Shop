@@ -8,7 +8,8 @@ export const superOfferProducts = [
             "images/5/IMG_1934.AVIF",
             "images/5/IMG_1935.AVIF"
         ],
-        description : "hi",
+        category: "کاپشن",
+        description : "کاپشنی گرم و سبک با طراحی مدرن، مقاوم در برابر سرما و باد. انتخابی عالی برای فصل‌های سرد و استایل‌های اسپرت.",
         stars: 5,
         id: "5"
     }
