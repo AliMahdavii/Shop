@@ -18,6 +18,7 @@
         <div class="product-info">
             <h2 id="name"></h2>
             <span class="price" id="price"></span>
+            <p class="category">دسته‌بندی: <span id="category"></span></p>
             <p class="description"></p>
 
             <div class="buttons">
@@ -46,6 +47,7 @@ if (!product) {
     document.getElementById("mainImage").src = product.mainImage;
     document.getElementById("name").textContent = product.name;
     document.getElementById("price").textContent = product.price.toLocaleString();
+    document.getElementById("category").textContent = product.category || "نامشخص";
     document.querySelector(".description").textContent = product.description || "";
 
     const galleryEl = document.getElementById("gallery");
