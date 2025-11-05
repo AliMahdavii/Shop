@@ -1,7 +1,7 @@
 .search-results {
-  margin: 2rem auto;
-  padding: 1rem;
   text-align: center;
+  margin: auto;
+  padding: auto;
 }
 
 .results-container {
@@ -65,7 +65,7 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 5px 15px;
+    padding: 5px;
 }
 
 .shopping-card .buttons .right .price{
@@ -83,14 +83,14 @@
     width: 60%;
     border: none;
     outline: none;
-    padding: 0.5rem;
-    margin: 3rem;
+    padding: 0.3rem;
+    margin: 2rem;
     cursor: pointer;
     border-radius: 0.75rem;
     background-color: #000;
     color: #fff;
     transition: all 0.3s ease-in-out;
-    font-size: 0.8rem;
+    font-size: 0.7rem;
 }
 
 .shopping-card .product-tocart-section button:hover {
@@ -104,10 +104,10 @@
     align-items: center;
     width: 38px;
     height: 38px;
-    padding-top: 0.5rem;
-    padding-bottom: 0.5rem;
-    margin-top: 3rem;
-    margin-bottom: 3rem;
+    padding-top: 0.3rem;
+    padding-bottom: 0.3rem;
+    margin-top: 2rem;
+    margin-bottom: 2rem;
     cursor: pointer;
     transition: all 0.25s ease-in-out;
 }
