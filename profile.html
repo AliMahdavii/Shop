@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/profile.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <title>Document</title>
+</head>
+<body>
+    <div class="profile-container">
+        <div class="user-header">
+            <i class="fa-solid fa-user-circle"></i>
+            <h2 id="username">حساب کاربری</h2>
+        </div>
+
+        <div class="user-info">
+            <p><strong>نام کاربری:</strong> <span id="user-name"></span> </p>
+        </div>
+        
+        <div class="favorites">
+            <h3 id="favorite-toggle">
+                علاقه‌مندی‌های من
+                <i class="fa-solid fa-chevron-down"></i>
+            </h3>
+            <div class="favorite-list" id="favorite-list"></div>
+        </div>
+
+        <button class="logout-btn" id="logout">خروج از حساب</button>
+
+        <a href="index.html" class="back" >بازگشت به صفحه اصلی</a>
+
+    </div>
+
+    <footer>
+        <div class="row">
+            <div class="col-lg-8">
+                <div class="right">
+                    <div class="title">
+                        درباره ما
+                    </div>
+                    <div class="des">
+                        Carhartt WIP | اصالت شهری، کیفیت بی‌چون‌وچرا
+<br>ما اینجا هستیم تا لباس‌ها و اکسسوری‌هایی ارائه بدیم که نه‌تنها راحت و با دوام هستن، بلکه سبک زندگی و شخصیت شما رو هم تعریف می‌کنن. هر قطعه کارهارت با دقت طراحی شده تا در خیابون‌های شهر و محیط‌های کاری سخت، همراه شما باشه.
+با ما تجربه‌ای از استایل اصیل شهری داشته باشین: از کاپشن‌ها و جلیقه‌های مقاوم گرفته تا شلوارها و اکسسوری‌های خفن که هر روزتون رو راحت‌تر و جذاب‌تر می‌کنن. کیفیت، جزئیات و دوام، همیشه در اولویت ماست.<br>
+📦 ارسال سریع و مطمئن
+<br>
+🔒 پرداخت امن و آسان
+<br>
+⭐ کیفیت تضمینی و اصالت برند
+<br>
+
+به جمع کارهارت WIP بپیوندید و سبک خودتون رو به همه نشون بدید!
+                    </div>
+                </div>   
+            </div>
+            <div class="col-lg-4">
+                <div class="left">
+                    <div class="title">
+                        ما را در شبکه های اجتماعی دنبال کنید :
+                    </div>
+                    <div class="socials">
+                        <a href=""><i class="fab fa-twitter"></i></a>
+                        <a href=""><i class="fab fa-instagram"></i></a>
+                        <a href=""><i class="fab fa-linkedin"></i></a>
+                        <a href=""><i class="fab fa-telegram-plane"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="bottom">
+                کلیه حقوق محفوظ می باشد 2025 ©
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const loggedInUser = JSON.parse(localStorage.getItem("logged-in"))?.username;
+            if(!loggedInUser){
+                alert("ابتدا وارد حساب کاربری شوید!");
+                window.location.href = "login.html";
+                return;
+            }
+            document.getElementById("username").textContent = `سلام، ${loggedInUser}!`;
+            document.getElementById("user-name").textContent = loggedInUser;
+
+            const userData = JSON.parse(localStorage.getItem(loggedInUser)) || {};
+            const favorites = userData.favorites || [];
+            const favoriteList = document.getElementById("favorite-list");
+
+            if(favorites.length === 0){
+                favoriteList.innerHTML = "<p class='empty-message'>هنوز هیچ محصولی در علاقه‌مندی‌ها ندارید 🖤</p>"
+            } else {
+                favoriteList.innerHTML = favorites.map(fav => 
+                    `<div class="fav-item">
+                        <img src="${fav.mainImage}">
+                        <div class="fav-details">
+                            <h4>${fav.name}</h4>    
+                            <p>${fav.price.toLocaleString()} تومان</p>
+                        </div>
+                    </div>
+                    `).join('');
+            }
+
+                document.getElementById("logout").addEventListener("click", () => {
+                if(confirm("آیا برای خروج مطمین هستید ؟")){
+                    localStorage.removeItem("logged-in");
+                    alert("با موفقیت از حساب خارج شدید.");
+                window.location.href = "login.html";
+                }
+            });
+
+            const favoritesSection = document.querySelector(".favorites");
+            const toggleBtn = document.getElementById("favorite-toggle");
+
+            toggleBtn.addEventListener("click", () => {
+                favoritesSection.classList.toggle("open");
+            });
+        });
+    </script>
+
+</body>
+</html>
