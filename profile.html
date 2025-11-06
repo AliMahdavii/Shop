@@ -92,7 +92,7 @@
                 favoriteList.innerHTML = "<p class='empty-message'>هنوز هیچ محصولی در علاقه‌مندی‌ها ندارید 🖤</p>"
             } else {
                 favoriteList.innerHTML = favorites.map(fav => 
-                    `<div class="fav-item">
+                    `<div class="fav-item" onclick="openProduct('${fav.id}')">
                         <img src="${fav.mainImage}">
                         <div class="fav-details">
                             <h4>${fav.name}</h4>    
@@ -117,6 +117,10 @@
                 favoritesSection.classList.toggle("open");
             });
         });
+
+        function openProduct(id){
+        window.location.href = `product.html?id=${id}`;
+    }
     </script>
 
 </body>
