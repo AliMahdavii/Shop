@@ -71,8 +71,8 @@
     </footer>
     <script type="module">
         import products from "./js/constants/product.js";
-import superOfferProducts from "./js/constants/supperOfferProduct.js";
-import otherProducts from "./js/constants/otherProducts.js";
+        import superOfferProducts from "./js/constants/supperOfferProduct.js";
+        import otherProducts from "./js/constants/otherProducts.js";
 
 const allProducts = [...products, ...superOfferProducts, ...otherProducts];
 
@@ -91,9 +91,66 @@ if (!product) {
     document.querySelector(".description").textContent = product.description || "";
 
     const galleryEl = document.getElementById("gallery");
-    galleryEl.innerHTML = product.gallery
-        .map(img => `<img src="${img}" onclick="document.getElementById('mainImage').src='${img}'">`)
-        .join("");
+
+const thumbnails = [
+  product.mainImage,
+  ...(Array.isArray(product.gallery)
+    ? product.gallery.filter(img => img !== product.mainImage)
+    : [])
+];
+
+galleryEl.innerHTML = thumbnails
+  .map((img, idx) => `
+    <img 
+      src="${img}" 
+      alt="${product.name}" 
+      class="thumb ${idx === 0 ? 'active' : ''}" 
+      data-src="${img}">
+  `)
+  .join("");
+
+  let startX = 0;
+let currentIndex = 0;
+
+const mainImageEl = document.getElementById("mainImage");
+
+mainImageEl.addEventListener("touchstart", (e) => {
+  startX = e.touches[0].clientX;
+});
+
+mainImageEl.addEventListener("touchend", (e) => {
+  const endX = e.changedTouches[0].clientX;
+  const diffX = startX - endX;
+
+  if (Math.abs(diffX) > 50) { // حداقل حرکت برای تشخیص سوایپ
+    if (diffX > 0) {
+      // سوایپ به چپ → عکس بعدی
+      currentIndex = (currentIndex + 1) % thumbnails.length;
+    } else {
+      // سوایپ به راست → عکس قبلی
+      currentIndex = (currentIndex - 1 + thumbnails.length) % thumbnails.length;
+    }
+
+    const newSrc = thumbnails[currentIndex];
+    mainImageEl.src = newSrc;
+
+    // تغییر حالت active بندانگشتی‌ها
+    galleryEl.querySelectorAll(".thumb").forEach(t => t.classList.remove("active"));
+    const activeThumb = galleryEl.querySelector(`.thumb[data-src="${newSrc}"]`);
+    if (activeThumb) activeThumb.classList.add("active");
+  }
+});
+
+galleryEl.querySelectorAll(".thumb").forEach(thumb => {
+  thumb.addEventListener("click", () => {
+    const src = thumb.dataset.src;
+    document.getElementById("mainImage").src = src;
+
+    galleryEl.querySelectorAll(".thumb").forEach(t => t.classList.remove("active"));
+    thumb.classList.add("active");
+  });
+});
+
 
     document.getElementById("addToCart").addEventListener("click", () => {
         addToCart(product.id, product.price, product.name, product.mainImage, product.gallery);
