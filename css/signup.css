@@ -1,0 +1,144 @@
+* {
+    box-sizing: border-box;
+    font-family:  "Vazirmatn", sans-serif;
+}
+
+body {
+    background: #f5f5f7;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.signup-container {
+    background: #fff;
+    width: 350px;
+    padding: 25px;
+    border-radius: 12px;
+    box-shadow: 0 5px 15px rgb(0, 0, 0,1);
+}
+
+.signup-container h2 {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 5px;
+    font-size: 14px;
+    color: #333;
+}
+
+.form-group input {
+    width: 100%;
+    padding: 8px 10px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    outline: none;
+    transition: 0.3s;
+}
+
+.form-group input:focus {
+    border-color: #007bff;
+}
+
+.btn {
+    width: 100%;
+    background: #007bff;
+    color: #fff;
+    border: none;
+    padding: 10px;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.btn:hover {
+    background: #0056b3;
+}
+
+.message {
+    text-align: center;
+    margin-top: 10px;
+    font-size: 13px;
+}
+
+.message a {
+    color: #007bff;
+    text-decoration: none;
+}
+
+.message a:hover {
+    text-decoration: underline;
+}
+
+.error {
+    color: #d93025;
+    font-size: 13px;
+    margin-top: 5px;
+}
+
+.success {
+    color: #198754;
+    font-size: 13px;
+    text-align: center;
+    margin-top: 10px;
+}
+
+footer {
+    background-color: #636e72;
+    font-size: 1em;
+    transition: 0.8s;
+}
+
+footer .right {
+    padding: 40px;
+}
+
+footer .right .title {
+    padding: 10px 0px;
+    color: white;
+    font-size: 1.2em;
+    font-weight: bold;
+}
+
+footer .right .des {
+    color: rgba(255, 255, 255, 0.7);
+    line-height: 1.9em;
+    font-size: 0.9em;
+}
+
+footer .left {
+    padding: 40px;
+}
+
+footer .left .title {
+    padding: 10px 0px;
+    color: white;
+    font-size: 1.2em;
+}
+
+footer .left .socials {
+    display: flex;
+    justify-content: space-between;
+}
+
+footer .left .socials a{
+    color: white;
+    font-size: 1.5em;
+    text-align: center;
+    margin-top: 20px;
+}
+
+footer .bottom {
+    color: white;
+    text-align: center;
+    background-color: #2d3436;
+    padding: 15px;
+}
