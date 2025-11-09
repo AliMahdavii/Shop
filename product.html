@@ -1,250 +1,0 @@
-<!DOCTYPE html>
-<html lang="fa" dir="rtl">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="css/product.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-    <title>Document</title>
-</head>
-<body>
-    <div class="product-container">
-        <div class="product-main">
-            <img src="" id="mainImage" alt="">
-        </div>
-
-        <div class="product-gallery" id="gallery"></div>
-
-        <div class="product-info">
-            <h2 id="name"></h2>
-            <span class="price" id="price"></span>
-            <p class="category">دسته‌بندی: <span id="category"></span></p>
-            <p class="description"></p>
-
-            <div class="buttons">
-                <button id="addToCart">افزودن به سبد خرید</button>
-                <div id="addTofavorite" class="favorite-btn">
-                    <i class="fas fa-heart"></i>
-                </div>
-            </div>
-        </div>
-    </div>
-    <footer>
-        <div class="row">
-            <div class="col-lg-8">
-                <div class="right">
-                    <div class="title">
-                        درباره ما
-                    </div>
-                    <div class="des">
-                        Carhartt WIP | اصالت شهری، کیفیت بی‌چون‌وچرا
-<br>ما اینجا هستیم تا لباس‌ها و اکسسوری‌هایی ارائه بدیم که نه‌تنها راحت و با دوام هستن، بلکه سبک زندگی و شخصیت شما رو هم تعریف می‌کنن. هر قطعه کارهارت با دقت طراحی شده تا در خیابون‌های شهر و محیط‌های کاری سخت، همراه شما باشه.
-با ما تجربه‌ای از استایل اصیل شهری داشته باشین: از کاپشن‌ها و جلیقه‌های مقاوم گرفته تا شلوارها و اکسسوری‌های خفن که هر روزتون رو راحت‌تر و جذاب‌تر می‌کنن. کیفیت، جزئیات و دوام، همیشه در اولویت ماست.<br>
-📦 ارسال سریع و مطمئن
-<br>
-🔒 پرداخت امن و آسان
-<br>
-⭐ کیفیت تضمینی و اصالت برند
-<br>
-
-به جمع کارهارت WIP بپیوندید و سبک خودتون رو به همه نشون بدید!
-                    </div>
-                </div>   
-            </div>
-            <div class="col-lg-4">
-                <div class="left">
-                    <div class="title">
-                        ما را در شبکه های اجتماعی دنبال کنید :
-                    </div>
-                    <div class="socials">
-                        <a href=""><i class="fab fa-twitter"></i></a>
-                        <a href=""><i class="fab fa-instagram"></i></a>
-                        <a href=""><i class="fab fa-linkedin"></i></a>
-                        <a href=""><i class="fab fa-telegram-plane"></i></a>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="bottom">
-                کلیه حقوق محفوظ می باشد 2025 ©
-        </div>
-    </footer>
-    <script type="module">
-        import products from "./js/constants/product.js";
-        import superOfferProducts from "./js/constants/supperOfferProduct.js";
-        import otherProducts from "./js/constants/otherProducts.js";
-
-const allProducts = [...products, ...superOfferProducts, ...otherProducts];
-
-const params = new URLSearchParams(window.location.search);
-const productId = params.get("id");
-
-const product = allProducts.find(p => String(p.id) === String(productId));
-
-if (!product) {
-    document.body.innerHTML = "<p style='text-align:center;'>محصولی یافت نشد ❌</p>";
-} else {
-    document.getElementById("mainImage").src = product.mainImage;
-    document.getElementById("name").textContent = product.name;
-    document.getElementById("price").textContent = product.price.toLocaleString();
-    document.getElementById("category").textContent = product.category || "نامشخص";
-    document.querySelector(".description").textContent = product.description || "";
-
-    const galleryEl = document.getElementById("gallery");
-
-const thumbnails = [
-  product.mainImage,
-  ...(Array.isArray(product.gallery)
-    ? product.gallery.filter(img => img !== product.mainImage)
-    : [])
-];
-
-galleryEl.innerHTML = thumbnails
-  .map((img, idx) => `
-    <img 
-      src="${img}" 
-      alt="${product.name}" 
-      class="thumb ${idx === 0 ? 'active' : ''}" 
-      data-src="${img}">
-  `)
-  .join("");
-
-  let startX = 0;
-let currentIndex = 0;
-
-const mainImageEl = document.getElementById("mainImage");
-
-mainImageEl.addEventListener("touchstart", (e) => {
-  startX = e.touches[0].clientX;
-});
-
-mainImageEl.addEventListener("touchend", (e) => {
-  const endX = e.changedTouches[0].clientX;
-  const diffX = startX - endX;
-
-  if (Math.abs(diffX) > 50) { // حداقل حرکت برای تشخیص سوایپ
-    if (diffX > 0) {
-      // سوایپ به چپ → عکس بعدی
-      currentIndex = (currentIndex + 1) % thumbnails.length;
-    } else {
-      // سوایپ به راست → عکس قبلی
-      currentIndex = (currentIndex - 1 + thumbnails.length) % thumbnails.length;
-    }
-
-    const newSrc = thumbnails[currentIndex];
-    mainImageEl.src = newSrc;
-
-    // تغییر حالت active بندانگشتی‌ها
-    galleryEl.querySelectorAll(".thumb").forEach(t => t.classList.remove("active"));
-    const activeThumb = galleryEl.querySelector(`.thumb[data-src="${newSrc}"]`);
-    if (activeThumb) activeThumb.classList.add("active");
-  }
-});
-
-galleryEl.querySelectorAll(".thumb").forEach(thumb => {
-  thumb.addEventListener("click", () => {
-    const src = thumb.dataset.src;
-    document.getElementById("mainImage").src = src;
-
-    galleryEl.querySelectorAll(".thumb").forEach(t => t.classList.remove("active"));
-    thumb.classList.add("active");
-  });
-});
-
-
-    document.getElementById("addToCart").addEventListener("click", () => {
-        addToCart(product.id, product.price, product.name, product.mainImage, product.gallery);
-    });
-
-    const favBtn = document.getElementById("addTofavorite");
-    favBtn.addEventListener("click", () => {
-        addTofavorite(favBtn, product.id, product.price, product.name, product.mainImage, product.gallery);
-    });
-
-    const loggedInUser = JSON.parse(localStorage.getItem("logged-in"))?.username;
-    if (loggedInUser) {
-        const userData = JSON.parse(localStorage.getItem(loggedInUser));
-        const isFav = userData?.favorites?.some(p => String(p.id) === String(product.id));
-        if (isFav) {
-            favBtn.classList.add("active");
-            favBtn.querySelector("i").style.color = "#ff4d4d";
-            favBtn.querySelector("i").style.webkitTextStroke = "0";
-        }
-    }
-}
-
-function addTofavorite(element, id, price, name, mainImage, gallery = []) {
-    const loggedInUser = JSON.parse(localStorage.getItem("logged-in"))?.username;
-    if (!loggedInUser) {
-        alert("ابتدا وارد حساب کاربری خود شوید!");
-        window.location.href = "login.html";
-        return;
-    }
-
-    const userData = JSON.parse(localStorage.getItem(loggedInUser)) || {
-        username: loggedInUser,
-        cart: [],
-        favorites: []
-    };
-
-    if (!Array.isArray(userData.favorites)) {
-        userData.favorites = [];
-    }
-
-    const idx = userData.favorites.findIndex(p => String(p.id) === String(id));
-    const icon = element.querySelector("i");
-
-    if (idx !== -1) {
-        userData.favorites.splice(idx, 1);
-        element.classList.remove("active");
-        if (icon) {
-            icon.style.color = "#fff";
-            icon.style.webkitTextStroke = "1.5px black";
-        }
-    } else {
-        userData.favorites.push({ id, price, name, mainImage, gallery });
-        element.classList.add("active");
-        if (icon) {
-            icon.style.color = "#ff4d4d";
-            icon.style.webkitTextStroke = "0";
-        }
-    }
-
-    localStorage.setItem(loggedInUser, JSON.stringify(userData));
-}
-
-function addToCart(id, price, name, mainImage, gallery) {
-    const username = JSON.parse(localStorage.getItem("logged-in"))?.username;
-    if (!username) {
-        alert("ابتدا وارد حساب کاربری خود شوید!");
-        return;
-    }
-
-    const userData = JSON.parse(localStorage.getItem(username)) || { username, cart: [], favorites: [] };
-    const cart = userData.cart || [];
-
-    const doesProductExistInCart = cart.some((product) => id == product.id);
-
-    if (doesProductExistInCart) {
-        alert("این محصول در سبد خرید موجود است.");
-    } else {
-        cart.push({
-            id,
-            price,
-            name,
-            mainImage,
-            gallery: Array.isArray(gallery) ? gallery : [],
-        });
-
-        userData.cart = cart;
-        localStorage.setItem(username, JSON.stringify(userData));
-        alert("محصول با موفقیت به سبد خرید اضافه شد.");
-        location.reload();
-    }
-}
-
-
-    </script>
-
-</body>
-</html>
