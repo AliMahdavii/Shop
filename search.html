@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>نتایج جستجو</title>
+  <link rel="stylesheet" href="css/product.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link rel="stylesheet" href="css/home.css">
+  <link rel="stylesheet" href="css/main.css">
+  <link rel="stylesheet" href="css/animate.css">
+  <link rel="stylesheet" href="css/flexboxgride.css">
+  <link rel="stylesheet" href="css/owl.carousel.min.css">
+  <link rel="stylesheet" href="css/owl.theme.default.min.css">
+  <link rel="stylesheet" href="css/search.css">
+
+</head>
+
+<body>
+  <div class="search-results">
+    <h2>نتایج جستجو</h2>
+    <div class="results-container" id="results"></div>
+  </div>
+
+  <footer>
+    <div class="row">
+      <div class="col-lg-8">
+        <div class="right">
+          <div class="title">درباره ما</div>
+          <div class="des">
+            Carhartt WIP | اصالت شهری، کیفیت بی‌چون‌وچرا
+            <br>ما اینجا هستیم تا لباس‌ها و اکسسوری‌هایی ارائه بدیم که نه‌تنها راحت و با دوام هستن، بلکه سبک زندگی و شخصیت شما رو هم تعریف می‌کنن...
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-4">
+        <div class="left">
+          <div class="title">ما را در شبکه‌های اجتماعی دنبال کنید:</div>
+          <div class="socials">
+            <a href=""><i class="fab fa-twitter"></i></a>
+            <a href=""><i class="fab fa-instagram"></i></a>
+            <a href=""><i class="fab fa-linkedin"></i></a>
+            <a href=""><i class="fab fa-telegram-plane"></i></a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="bottom">
+      کلیه حقوق محفوظ می‌باشد © 2025
+    </div>
+  </footer>
+
+  <script type="module">
+    import products from "./js/constants/product.js";
+    import superOfferProducts from "./js/constants/supperOfferProduct.js";
+    import otherProducts from "./js/constants/otherProducts.js";
+
+    const allProducts = [...products, ...superOfferProducts, ...otherProducts];
+    const params = new URLSearchParams(window.location.search);
+    const query = params.get("q")?.toLowerCase() || "";
+
+    const filtered = allProducts.filter(p =>
+      p.name.toLowerCase().includes(query) ||
+      p.category?.toLowerCase().includes(query)
+    );
+
+    const resultsEl = document.getElementById("results");
+
+    if (filtered.length === 0) {
+      resultsEl.innerHTML = "<p style='text-align:center;'>هیچ محصولی یافت نشد ❌</p>";
+    } else {
+      resultsEl.innerHTML = filtered.map(product => `
+        <div class="col-lg-3 col-md-4 col-sm-6 col-xs-6">
+          <div class="shopping-card" onclick="openProduct('${product?.id}')">
+            <div class="img-sec">
+              <div class="product-slider">
+                <img src="${product?.mainImage}" alt="" class="active">
+                ${product?.gallery.map(img => `<img src="${img}" alt="">`).join('')}
+              </div>
+              ${product.isHotOffer ? `<span class="hot-offer">پیشنهاد ویژه</span>` : ""}
+            </div>
+            <div class="title">${product?.name}</div>
+            <div class="buttons">
+                <span class="price">${product?.price.toLocaleString()} تومان</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      `).join("");
+    }
+
+    window.openProduct = (id) => {
+      window.location.href = `product.html?id=${id}`;
+    };
+  </script>
+</body>
+</html>
