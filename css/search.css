@@ -8,55 +8,61 @@
   display: flex;
   flex-wrap: wrap;
   justify-content: flex-start;
+  align-items: stretch;
   padding: 2rem 1rem;
   font-size: 1em;
 }
 
 .shopping-card {
-    text-align: center;
-    box-shadow: 0px 2px 8px 0px rgba(0, 0, 0, 0.5);
-    margin: 1rem 1.5rem;
-    border-radius: 5px;
-    padding: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  flex: 1 1 250px;           
+  text-align: center;
+  box-shadow: 0px 2px 8px 0px rgba(0, 0, 0, 0.5);
+  margin: 0.7rem 1.1rem;
+  border-radius: 5px;
+  padding: 0.7rem;
+  transition: all 0.3s ease;
+}
+
+.shopping-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0px 6px 14px rgba(0,0,0,0.4);
 }
 
 .shopping-card .img-sec {
-    position: relative;
+  position: relative;
+  flex-grow: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
-.shopping-card .img-sec img{
-    width: 60%;
-    border-radius: 10px;
-}
-
-.shopping-card .img-sec .hot-offer{
-    background-color: #e74c3c;
-    color: white;
-    padding: 3px 5px;
-    border-radius: 10px;position: absolute;
-    right: 10px;
-    top: 10px;
-    font-size: 0.9em;
+.shopping-card .img-sec img {
+  width: 70%;
+  border-radius: 10px;
+  object-fit: contain;
 }
 
 .shopping-card .title {
-    color: #444;
-    font-size: 1.3em;
-    font-weight: bold;
-    margin: 15px;
+  color: #444;
+  font-size: 0.8em;
+  font-weight: bold;
+  margin: 10px 0;
 }
 
 .shopping-card .buttons {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 5px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 5px;
 }
 
-.shopping-card .buttons .price{
-    color: #666;
-    font-weight: bold;
-    font-size: 1em;
+.shopping-card .buttons .price {
+  color: #666;
+  font-weight: bold;
+  font-size: 1em;
 }
 
 footer {
