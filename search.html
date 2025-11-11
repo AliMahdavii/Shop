@@ -1,229 +1,0 @@
-<!DOCTYPE html>
-<html lang="fa" dir="rtl">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
-  <link rel="stylesheet" href="css/product.css">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-  <link rel="stylesheet" href="css/home.css">
-  <link rel="stylesheet" href="css/main.css">
-  <link rel="stylesheet" href="css/animate.css">
-  <link rel="stylesheet" href="css/flexboxgride.css">
-  <link rel="stylesheet" href="css/owl.carousel.min.css">
-  <link rel="stylesheet" href="css/owl.theme.default.min.css">
-  <link rel="stylesheet" href="css/search.css">
-
-</head>
-<body>
-  <div class="search-results">
-    <h2>نتایج جستجو</h2>
-    <div class="results-container" id="results"></div>
-  </div>
-
-  <footer>
-        <div class="row">
-            <div class="col-lg-8">
-                <div class="right">
-                    <div class="title">
-                        درباره ما
-                    </div>
-                    <div class="des">
-                        Carhartt WIP | اصالت شهری، کیفیت بی‌چون‌وچرا
-<br>ما اینجا هستیم تا لباس‌ها و اکسسوری‌هایی ارائه بدیم که نه‌تنها راحت و با دوام هستن، بلکه سبک زندگی و شخصیت شما رو هم تعریف می‌کنن. هر قطعه کارهارت با دقت طراحی شده تا در خیابون‌های شهر و محیط‌های کاری سخت، همراه شما باشه.
-با ما تجربه‌ای از استایل اصیل شهری داشته باشین: از کاپشن‌ها و جلیقه‌های مقاوم گرفته تا شلوارها و اکسسوری‌های خفن که هر روزتون رو راحت‌تر و جذاب‌تر می‌کنن. کیفیت، جزئیات و دوام، همیشه در اولویت ماست.<br>
-📦 ارسال سریع و مطمئن
-<br>
-🔒 پرداخت امن و آسان
-<br>
-⭐ کیفیت تضمینی و اصالت برند
-<br>
-
-به جمع کارهارت WIP بپیوندید و سبک خودتون رو به همه نشون بدید!
-                    </div>
-                </div>   
-            </div>
-            <div class="col-lg-4">
-                <div class="left">
-                    <div class="title">
-                        ما را در شبکه های اجتماعی دنبال کنید :
-                    </div>
-                    <div class="socials">
-                        <a href=""><i class="fab fa-twitter"></i></a>
-                        <a href=""><i class="fab fa-instagram"></i></a>
-                        <a href=""><i class="fab fa-linkedin"></i></a>
-                        <a href=""><i class="fab fa-telegram-plane"></i></a>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="bottom">
-                کلیه حقوق محفوظ می باشد 2025 ©
-        </div>
-    </footer>
-
-  <script type="module">
-    import products from "./js/constants/product.js";
-    import superOfferProducts from "./js/constants/supperOfferProduct.js";
-    import otherProducts from "./js/constants/otherProducts.js";
-
-    const allProducts = [...products, ...superOfferProducts, ...otherProducts];
-
-    const params = new URLSearchParams(window.location.search);
-    const query = params.get("q")?.toLowerCase() || "";
-
-    const filtered = allProducts.filter(p =>
-      p.name.toLowerCase().includes(query) ||
-      p.category?.toLowerCase().includes(query)
-    );
-
-    const resultsEl = document.getElementById("results");
-
-    if (filtered.length === 0) {
-      resultsEl.innerHTML = "<p style='text-align:center;'>هیچ محصولی یافت نشد ❌</p>";
-    } else {
-      resultsEl.innerHTML = filtered.map(product => `
-        <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12">
-                    <div class="shopping-card" onclick="openProduct('${product?.id}')">
-                    <div class="img-sec">
-                        <div class="product-slider">
-                            <img src="${product?.mainImage}" alt="" class="active">
-                            ${product?.gallery.map(img => `<img src="${img}" alt="">`).join('')}
-                        </div>
-                        ${product.isHotOffer?`<span class="hot-offer">پیشنهاد ویژه</span>`:""}
-                        <div class="stars" data-rating="${product?.stars}">
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                        </div>
-                    </div>
-                    <div class="title">
-                        ${product?.name}
-                    </div>
-                    <div class="buttons">
-                        <div class="right">
-                            <span class="price">${product?.price.toLocaleString()} تومان</span>
-                        </div>
-                        <div class="left">
-                        <div onclick='event.stopPropagation(), addToCart(
-                        ${product?.id},
-                        ${product?.price},
-                        "${product?.name.replace(/"/g, '&quot;')}",
-                        "${product?.mainImage}",
-                        ${JSON.stringify(product?.gallery).replace(/"/g, '&quot;')}
-                        )' class="product-tocart-section">
-                            <button>افزودن به سبد خرید</button>
-                        </div>
-
-                        <div data-id="${product?.id}" onclick='event.stopPropagation(), addTofavorite(
-                        this,
-                        ${product?.id},
-                        ${product?.price},
-                        "${product?.name.replace(/"/g, '&quot;')}",
-                        "${product?.mainImage}",
-                        ${JSON.stringify(product?.gallery).replace(/"/g, '&quot;')}
-                        )' class="favorite-product">
-                            <i class="fas fa-heart"></i>
-                        </div>
-                        </div>
-                    </div>
-                </div>
-                </div>
-      `).join(""); 
-    }
-
-    document.querySelectorAll(".shopping-card .img-sec .stars").forEach(starContainer => {
-    const rating = parseInt(starContainer.getAttribute("data-rating"));
-    const stars = starContainer.querySelectorAll("i");
-
-  stars.forEach((star, index) => {
-    if (index < rating) {
-      star.classList.add("active");
-    }
-  });
-  });
-
-    function addTofavorite(element, id, price, name, mainImage, gallery = []) {
-        const loggedInUser = JSON.parse(localStorage.getItem("logged-in"))?.username;
-                
-        if (!loggedInUser) {
-            alert("ابتدا وارد حساب کاربری خود شوید!");
-            window.location.href = "login.html";
-            return;
-        }
-    
-        const userData = JSON.parse(localStorage.getItem(loggedInUser)) || {username: loggedInUser, cart: [], favorites: [] };
-    
-        if (!Array.isArray(userData.favorites)) {
-            userData.favorites = [];
-        }
-
-        const idx = userData.favorites.findIndex(p => String(p.id) === String(id));
-        const icon = element.querySelector("i");
-
-        if(idx !== -1){
-            userData.favorites.splice(idx,1);
-            element.classList.remove("active");
-
-            if(icon){
-            icon.style.color = "#fff";
-            icon.style.webkitTextStroke = "1.5px black";
-            }
-        } else{
-            const newFavorite = { id, price, name, mainImage, gallery };
-            userData.favorites.push(newFavorite);
-            element.classList.add("active");
-
-            if(icon){
-                icon.style.color = "#ff4d4d";
-                icon.style.webkitTextStroke = "0px";
-            }
-        }
-    
-        localStorage.setItem(loggedInUser, JSON.stringify(userData));
-}
-
-    function openProduct(id){
-        window.location.href = `product.html?id=${id}`;
-    }
-
-    const addToCart = (id, price, name, mainImage, gallery) => {
-                const username = JSON.parse(localStorage.getItem("logged-in"))?.username;
-                if (!username) {
-                    alert("ابتدا وارد حساب کاربری خود شوید!");
-                    return;
-                }
-
-            const userData = JSON.parse(localStorage.getItem(username)) || { username, cart: [], favorites: [] };
-            const cart = userData.cart || [];
-
-            const doesProductExistInCart = cart.some((product) => id == product.id);
-
-            if (doesProductExistInCart) {
-                alert("این محصول در سبد خرید موجود است.");
-            } else {
-                cart.push({
-                    id,
-                    price,
-                    name,
-                    mainImage,
-                    gallery: Array.isArray(gallery) ? gallery : [],
-                });
-            
-                userData.cart = cart;
-            
-                localStorage.setItem(username, JSON.stringify(userData));
-                alert("محصول مورد نظر با موفقیت به سبد خرید اضافه شد.");
-                location.reload();
-            }
-};
-
-window.addToCart = addToCart;
-window.addTofavorite = addTofavorite;
-window.openProduct = openProduct;
-
-  </script>
-</body>
-</html>
