@@ -44,25 +44,23 @@ a:hover {
 
 .user-info {
     margin-bottom: 2rem;
-    padding-right: 0.8rem;
 }
 
 .user-info p {
     margin: 0.5rem 0;
-    font-size: 1.2rem;
+    font-size: 1rem;
 }
 
 .settings-btn {
     display: block;
-    padding: 0.8rem;
     color: #333;
     text-align: start;
-    font-size: 1.3rem;
+    font-size: 1rem;
+    font-weight: 200;
     transition: 0.3s;
-    text-decoration: none;
 }
 
-.settings-btn a:hover {
+.settings-btn:hover {
     text-decoration: none;
 }
 
