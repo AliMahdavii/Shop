@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>تنظیمات کاربری</title>
+    <link rel="stylesheet" href="css/profile.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+
+<body>
+
+    <div class="profile-container">
+
+        <div class="user-header">
+            <i class="fa-solid fa-gear"></i>
+            <h2>تنظیمات کاربری</h2>
+        </div>
+
+        <div class="user-info">
+            <p><strong>کاربر:</strong> <span id="username"></span></p>
+        </div>
+
+        <hr>
+
+        <div class="setting-box">
+            <h3>تغییر نام کاربری</h3>
+            <input type="text" id="new-username" placeholder="نام کاربری جدید">
+            <button id="change-username-btn">ثبت نام جدید</button>
+        </div>
+
+        <hr>
+
+        <div class="setting-box">
+            <h3>تغییر رمز عبور</h3>
+            <input type="password" id="new-password" placeholder="رمز جدید">
+            <button id="change-password-btn">تغییر رمز</button>
+        </div>
+
+        <hr>
+
+        <div class="setting-box">
+            <h3>حالت نمایش</h3>
+            <button id="dark-toggle">فعال‌سازی دارک‌مود</button>
+        </div>
+
+        <hr>
+
+        <div class="setting-box danger">
+            <h3>حذف حساب</h3>
+            <button id="delete-account-btn" class="danger-btn">حذف کامل حساب</button>
+        </div>
+
+        <a href="profile.html" class="back">بازگشت به صفحه پروفایل</a>
+
+    </div>
+
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+
+    const logged = JSON.parse(localStorage.getItem("logged-in"))?.username;
+    if(!logged){
+        alert("ابتدا وارد حساب کاربری شوید!");
+        location.href = "login.html";
+        return;
+    }
+
+    document.getElementById("username").textContent = logged;
+
+    const userData = JSON.parse(localStorage.getItem(logged)) || {};
+
+    document.getElementById("change-username-btn").onclick = () => {
+        const newUser = document.getElementById("new-username").value.trim();
+        if(!newUser) return alert("نام جدید معتبر نیست");
+
+        if(localStorage.getItem(newUser))
+            return alert("این نام قبلا وجود دارد!");
+
+        localStorage.setItem(newUser, JSON.stringify(userData));
+        localStorage.removeItem(logged);
+
+        localStorage.setItem("logged-in", JSON.stringify({ username: newUser }));
+
+        alert("نام کاربری با موفقیت تغییر کرد");
+        location.reload();
+    };
+
+    document.getElementById("change-password-btn").onclick = () => {
+        const newPass = document.getElementById("new-password").value.trim();
+        if(!newPass) return alert("رمز جدید معتبر نیست");
+
+        userData.password = newPass;
+        localStorage.setItem(logged, JSON.stringify(userData));
+
+        alert("رمز عبور تغییر کرد.");
+    };
+
+    document.getElementById("dark-toggle").onclick = () => {
+        document.body.classList.toggle("dark");
+    };
+
+    document.getElementById("delete-account-btn").onclick = () => {
+        if(confirm("آیا مطمئن هستید؟ حساب شما حذف خواهد شد.")){
+            localStorage.removeItem(logged);
+            localStorage.removeItem("logged-in");
+            alert("حساب با موفقیت حذف شد");
+            location.href = "login.html";
+        }
+    };
+
+});
+</script>
+
+</body>
+</html>

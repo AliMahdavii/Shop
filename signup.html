@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/signup.css">
+    <title>Document</title>
+</head>
+<body>
+    <div class="signup-container">
+        <h2>ایجاد حساب کاربری</h2>
+        <form action="" id="signup-form">
+            <div class="form-group">
+                <label>نام کاربری</label>
+                <input type="text" id="username" required>
+            </div>
+
+            <div class="form-group">
+                <label>رمز عبور</label>
+                <input type="password" id="password" required>
+            </div>
+
+            <div class="form-group">
+                <label>تکرار رمز عبور</label>
+                <input type="password" id="confrimPassword" required>
+            </div>
+
+            <button type="submit" class="btn">ثبت‌نام</button>
+            <div id="error-message" class="error"></div>
+            <div id="success-message" class="success"></div>
+
+            <div class="message">
+            حساب دارید؟ <a href="login.html">وارد شوید</a>
+            </div>
+        </form>
+    </div>
+
+    <script>
+        const form = document.getElementById("signup-form");
+        const errorMessage = document.getElementById("error-message");
+        const successMessage = document.getElementById("success-message");
+
+        form.addEventListener("submit", (e) => {
+            e.preventDefault();
+            errorMessage.textContent = "";
+            successMessage.textContent = "";
+
+                const username = document.getElementById("username").value.trim();
+                const password = document.getElementById("password").value.trim();
+                const confrimPassword = document.getElementById("confrimPassword").value.trim();
+
+            if(!username || !password || !confrimPassword){
+                errorMessage.textContent = "لطفاً همه فیلدها را پر کنید.";
+                return;
+            }
+
+            if(password.length < 4){
+                errorMessage.textContent = "رمز عبور باید حداقل 4 کاراکتر باشد.";
+                return;
+            }
+
+            if(password !== confrimPassword){
+                errorMessage.textContent = "رمزها مطابقت ندارند.";
+                return;
+            }
+
+            const users = JSON.parse(localStorage.getItem("users")) || [];
+            const userExist = users.find(u => u.username === username);
+
+            if(userExist){
+                errorMessage.textContent = "این نام کاربری قبلاً ثبت شده است.";
+                return;
+            }
+
+            const newUser = {
+                username,
+                password,
+                cart: []
+            };
+
+            users.push(newUser);
+            localStorage.setItem("users", JSON.stringify(users));
+
+            successMessage.textContent = "ثبت‌نام با موفقیت انجام شد ✅";
+
+            form.reset();
+
+            setTimeout(() => {
+            window.location.href = "login.html";
+        }, 1500);
+
+        });
+    </script>
+
+</body>
+</html>
