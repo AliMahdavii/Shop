@@ -8,13 +8,13 @@
     <title>Document</title>
 </head>
 <body>
-    <div class="profile-container">
+    <div class="profile-container font-rokh">
         <div class="user-header">
             <i class="fa-solid fa-user-circle"></i>
             <h2 id="username">حساب کاربری</h2>
         </div>
 
-        <div class="user-info">
+        <div class="user-info font-rokh">
             <p><strong>نام کاربری:</strong> <span id="user-name"></span> </p>
         </div>
         
@@ -23,7 +23,7 @@
             تنظیمات کاربری
         </a>
         
-        <div class="favorites">
+        <div class="favorites font-rokh">
             <h3 id="favorite-toggle">
                 علاقه‌مندی‌های من
                 <i class="fa-solid fa-chevron-down"></i>
@@ -31,9 +31,9 @@
             <div class="favorite-list" id="favorite-list"></div>
         </div>
 
-        <button class="logout-btn" id="logout">خروج از حساب</button>
+        <button class="logout-btn font-rokh" id="logout">خروج از حساب</button>
 
-        <a href="index.html" class="back" >بازگشت به صفحه اصلی</a>
+        <a href="index.html" class="back font-rokh" >بازگشت به صفحه اصلی</a>
 
     </div>
 
@@ -97,7 +97,7 @@
                 favoriteList.innerHTML = "<p class='empty-message'>هنوز هیچ محصولی در علاقه‌مندی‌ها ندارید 🖤</p>"
             } else {
                 favoriteList.innerHTML = favorites.map(fav => 
-                    `<div class="fav-item" onclick="openProduct('${fav.id}')">
+                    `<div class="fav-item font-rokh" onclick="openProduct('${fav.id}')">
                         <img src="${fav.mainImage}">
                         <div class="fav-details">
                             <h4>${fav.name}</h4>    
