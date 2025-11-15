@@ -16,13 +16,13 @@
         <div class="product-gallery" id="gallery"></div>
 
         <div class="product-info">
-            <h2 id="name"></h2>
+            <h2 id="name" class="font-rokh"></h2>
             <span class="price" id="price"></span>
-            <p class="category">دسته‌بندی: <span id="category"></span></p>
-            <p class="description"></p>
+            <p class="category font-rokh">دسته‌بندی: <span id="category"></span></p>
+            <p class="description font-rokh"></p>
 
             <div class="buttons">
-                <button id="addToCart">خرید محصول 🛒</button>
+                <button id="addToCart" class="font-rokh">خرید محصول 🛒</button>
                 <div id="addTofavorite" class="favorite-btn">
                     <i class="fas fa-heart"></i>
                 </div>
@@ -31,8 +31,8 @@
     </div>
 
     <section class="related-products">
-        <h3>محصولات مرتبط</h3>
-        <div class="related-container" id="relatedProducts"></div>
+        <h3 class="font-rokh">محصولات مرتبط</h3>
+        <div class="related-container font-rokh" id="relatedProducts"></div>
     </section>
 
     <footer>
@@ -88,7 +88,7 @@ const productId = params.get("id");
 const product = allProducts.find(p => String(p.id) === String(productId));
 
 if (!product) {
-    document.body.innerHTML = "<p style='text-align:center;'>محصولی یافت نشد ❌</p>";
+    document.body.innerHTML = "<p class='font-rokh' style='text-align:center;'>محصولی یافت نشد ❌</p>";
 } else {
     document.getElementById("mainImage").src = product.mainImage;
     document.getElementById("name").textContent = product.name;
